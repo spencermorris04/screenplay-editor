@@ -134,7 +134,7 @@ const Editor: FC = () => {
         break;
       case 'character':
         newDiv.classList.add(
-          'pl-[23%]',
+          'pl-[0%]',
           'text-center',
           'uppercase',
           'bg-blue-200',
@@ -147,8 +147,8 @@ const Editor: FC = () => {
         break;
       case 'dialogue':
         newDiv.classList.add(
-          'pl-[20%]',
-          'pr-[20%]',
+          'pl-[33%]',
+          'pr-[33%]',
           'bg-red-200',
           'bg-opacity-50'
         );
