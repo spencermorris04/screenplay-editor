@@ -2,16 +2,17 @@
 
 'use client';
 
-import React, { FC, useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { FaPencilAlt, FaCheck } from 'react-icons/fa'; // Using react-icons for icons
+import type { FC } from 'react';
 
 // Define the types for screenplay elements
 type ElementType =
   | 'scene-heading'
   | 'action'
-  | 'character'
-  | 'parenthetical'
   | 'dialogue'
+  | 'parenthetical'
+  | 'character'
   | 'transition'
   | 'shot'
   | 'note';
@@ -65,13 +66,11 @@ const Editor: FC = () => {
     scenes: [],
     characters: [],
   });
-  const [lineNumber, setLineNumber] = useState<number>(1);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState<boolean>(false);
-  const [currentElementType, setCurrentElementType] = useState<ElementType | null>(null);
   const [lastCharacters, setLastCharacters] = useState<string[]>([]);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
-  const [editedProjectName, setEditedProjectName] = useState<string>('');
+  const [editedProjectName, setEditedProjectName] = useState('');
 
   // Utility function to extract ElementType from classList
   const getElementType = (element: HTMLElement): ElementType | null => {
@@ -98,52 +97,6 @@ const Editor: FC = () => {
     if (!text) return text;
     return text.charAt(0).toUpperCase() + text.slice(1);
   };
-
-  // Load projects from local storage on mount
-  useEffect(() => {
-    const savedProjects = localStorage.getItem('projects');
-    if (savedProjects) {
-      try {
-        const projectsData = JSON.parse(savedProjects) as Project[];
-        setProjects(projectsData);
-        if (projectsData.length > 0) {
-          // Set the first project as the current project
-          setCurrentProjectId(projectsData[0].id);
-          setScreenplay(projectsData[0].screenplay);
-          reconstructEditorContent(projectsData[0].screenplay);
-          console.log('Loaded projects from local storage:', projectsData);
-          // Set lineNumber to the highest line_number in JSON
-          const highestLine = Math.max(
-            ...projectsData[0].screenplay.scenes.flatMap(scene => [
-              scene.heading?.line_number || 0,
-              ...scene.screen_actions.map(action => action.line_number),
-              ...scene.notes.map(note => note.line_number),
-              ...scene.shots.map(shot => shot.line_number),
-              ...scene.transitions.map(transition => transition.line_number),
-              ...scene.dialogues.map(dialogue => dialogue.line.line_number),
-              ...scene.parentheticals.map(parenthetical => parenthetical.line.line_number),
-            ])
-          );
-          setLineNumber(highestLine + 1);
-        }
-      } catch (error) {
-        console.error('Failed to parse projects from local storage:', error);
-        // If parsing fails, create a new project
-        createNewProject();
-      }
-    } else {
-      // No projects, create a new one
-      createNewProject();
-    }
-  }, []);
-
-  // Auto-save JSON structure every minute
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updateJSONStructure();
-    }, 60000); // 60000 ms = 1 minute
-    return () => clearInterval(interval);
-  }, [screenplay, currentProjectId]);
 
   // Function to create and insert a new line with specific formatting
   const createNewLine = (
@@ -248,9 +201,6 @@ const Editor: FC = () => {
     } else {
       console.error('Editor reference is null.');
     }
-
-    // Increment line number
-    setLineNumber((prev) => prev + 1);
   };
 
   // Function to apply formatting based on class name
@@ -267,7 +217,11 @@ const Editor: FC = () => {
     }
 
     // Traverse up to find a container that is a child of editorRef.current
-    while (container && container.parentElement !== editorRef.current) {
+    while (
+      container &&
+      container.parentElement &&
+      container.parentElement !== editorRef.current
+    ) {
       container = container.parentElement;
     }
 
@@ -279,13 +233,15 @@ const Editor: FC = () => {
           : (range.startContainer as HTMLElement | null);
       if (referenceNode && editorRef.current?.contains(referenceNode)) {
         // Auto-capitalize first letter if not parenthetical
-        const content = className !== 'parenthetical' ? capitalizeFirstLetter('') : '';
+        const content =
+          className !== 'parenthetical' ? capitalizeFirstLetter('') : '';
         createNewLine(className, content, referenceNode);
         return;
       }
 
       // If we can't find a reference node, append at the end
-      const content = className !== 'parenthetical' ? capitalizeFirstLetter('') : '';
+      const content =
+        className !== 'parenthetical' ? capitalizeFirstLetter('') : '';
       createNewLine(className, content);
       return;
     }
@@ -329,7 +285,7 @@ const Editor: FC = () => {
       'bg-opacity-50',
     ];
 
-    formattingClasses.forEach((cls) => container.classList.remove(cls));
+    formattingClasses.forEach((cls) => container!.classList.remove(cls));
 
     // Re-apply classes based on the new formatting
     switch (className) {
@@ -342,11 +298,13 @@ const Editor: FC = () => {
           'bg-opacity-50'
         );
         // Capitalize the text
-        container.textContent = capitalizeFirstLetter(container.textContent ?? '');
+        container.textContent = (container.textContent ?? '').toUpperCase();
         break;
       case 'action':
         container.classList.add('pl-[5%]', 'bg-yellow-200', 'bg-opacity-50');
-        container.textContent = capitalizeFirstLetter(container.textContent ?? '');
+        container.textContent = capitalizeFirstLetter(
+          container.textContent ?? ''
+        );
         break;
       case 'character':
         container.classList.add(
@@ -366,16 +324,14 @@ const Editor: FC = () => {
         textContent = textContent.replace(/^\(|\)$/g, '');
         container.textContent = '(' + textContent + ')';
         // Move cursor inside the parentheses
-        const textNode = container.firstChild as Text | null;
-        if (textNode) {
+        const textNode = container.firstChild;
+        if (textNode && textNode.nodeType === Node.TEXT_NODE) {
           const pos = 1;
           const newRange = document.createRange();
           newRange.setStart(textNode, pos);
           newRange.setEnd(textNode, pos + textContent.length);
-          if (selection) {
-            selection.removeAllRanges();
-            selection.addRange(newRange);
-          }
+          selection.removeAllRanges();
+          selection.addRange(newRange);
         }
         break;
       case 'dialogue':
@@ -385,7 +341,9 @@ const Editor: FC = () => {
           'bg-red-200',
           'bg-opacity-50'
         );
-        container.textContent = capitalizeFirstLetter(container.textContent ?? '');
+        container.textContent = capitalizeFirstLetter(
+          container.textContent ?? ''
+        );
         break;
       case 'transition':
         container.classList.add(
@@ -413,7 +371,9 @@ const Editor: FC = () => {
           'bg-gray-300',
           'bg-opacity-50'
         );
-        container.textContent = capitalizeFirstLetter(container.textContent ?? '');
+        container.textContent = capitalizeFirstLetter(
+          container.textContent ?? ''
+        );
         break;
       default:
         break;
@@ -423,8 +383,6 @@ const Editor: FC = () => {
     selection.removeAllRanges();
     selection.addRange(range);
 
-    // Update current element type for suggestions
-    setCurrentElementType(className);
     console.log(`Applied formatting: ${className}`);
   };
 
@@ -445,7 +403,10 @@ const Editor: FC = () => {
     }
 
     // Traverse up to find a container that is a child of editorRef.current
-    while (container && container.parentElement !== editorRef.current) {
+    while (
+      container?.parentElement &&
+      container.parentElement !== editorRef.current
+    ) {
       container = container.parentElement;
     }
 
@@ -472,81 +433,21 @@ const Editor: FC = () => {
     }
 
     // Create and insert the new line after the current line
-    createNewLine(newClass, newClass !== 'parenthetical' ? capitalizeFirstLetter('') : '', container);
+    createNewLine(newClass, capitalizeFirstLetter(''), container);
 
-    // Update current element type for suggestions
-    setCurrentElementType(newClass);
     console.log(`Inserted new line with type: ${newClass}`);
   };
 
   // Function to handle input events
   const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
     const target = e.target as HTMLElement;
-    let text = target.textContent?.trim() ?? '';
-
-    if (target.classList.contains('parenthetical')) {
-      const selection = window.getSelection();
-      if (!selection || selection.rangeCount === 0) return;
-
-      const range = selection.getRangeAt(0);
-
-      // Ensure parentheses
-      if (!text.startsWith('(') || !text.endsWith(')')) {
-        // Remove any existing parentheses to avoid duplication
-        let innerText = text.replace(/^\(|\)$/g, '');
-        target.textContent = '(' + innerText + ')';
-
-        // Move cursor inside
-        const textNode = target.firstChild as Text | null;
-        if (textNode) {
-          const newRange = document.createRange();
-          newRange.setStart(textNode, 1);
-          newRange.setEnd(textNode, 1 + innerText.length);
-          if (selection) {
-            selection.removeAllRanges();
-            selection.addRange(newRange);
-          }
-        }
-      }
-
-      // Prevent deletion of parentheses
-      if (text.length < 2) {
-        target.textContent = '()';
-        const textNode = target.firstChild as Text | null;
-        if (textNode) {
-          const newRange = document.createRange();
-          newRange.setStart(textNode, 1);
-          newRange.setEnd(textNode, 1);
-          if (selection) {
-            selection.removeAllRanges();
-            selection.addRange(newRange);
-          }
-        }
-      }
-    }
-
-    // Handle auto-capitalization for all lines except parentheticals
-    if (!target.classList.contains('parenthetical')) {
-      const firstChar = target.textContent?.charAt(0);
-      if (firstChar && firstChar !== firstChar.toUpperCase()) {
-        target.textContent = capitalizeFirstLetter(target.textContent ?? '');
-        // Move cursor to the correct position
-        const selection = window.getSelection();
-        if (selection && selection.rangeCount > 0) {
-          const range = selection.getRangeAt(0);
-          range.setStart(target.firstChild!, 1);
-          range.setEnd(target.firstChild!, range.endOffset);
-          selection.removeAllRanges();
-          selection.addRange(range);
-        }
-      }
-    }
+    const text = target.textContent?.trim() ?? '';
 
     // Handle suggestions for scene headings and character names
     if (target.classList.contains('scene-heading')) {
       const sceneHeadings = screenplay.scenes
         .map((scene) => scene.heading?.text ?? '')
-        .filter((text) => text);
+        .filter((txt) => txt !== '');
       const uniqueHeadings = Array.from(new Set(sceneHeadings));
       const filteredSuggestions = uniqueHeadings.filter((heading) =>
         heading.toLowerCase().includes(text.toLowerCase())
@@ -554,14 +455,12 @@ const Editor: FC = () => {
       setSuggestions(filteredSuggestions);
       setShowSuggestions(true);
     } else if (target.classList.contains('character')) {
-      const characterNames = screenplay.characters.map((char) => char.name);
+      const characterNames = screenplay.characters.map((char) => char.name ?? '');
       const uniqueNames = Array.from(new Set(characterNames));
 
       // Suggest second last used character
-      let topSuggestion = '';
-      if (lastCharacters.length >= 2) {
-        topSuggestion = lastCharacters[lastCharacters.length - 2];
-      }
+      const topSuggestion =
+        lastCharacters.length >= 2 ? lastCharacters[lastCharacters.length - 2] : '';
       const filteredSuggestions = uniqueNames.filter((name) =>
         name.toLowerCase().includes(text.toLowerCase())
       );
@@ -628,7 +527,10 @@ const Editor: FC = () => {
       }
 
       // Traverse up to find a container that is a child of editorRef.current
-      while (container && container.parentElement !== editorRef.current) {
+      while (
+        container?.parentElement &&
+        container.parentElement !== editorRef.current
+      ) {
         container = container.parentElement;
       }
 
@@ -641,7 +543,9 @@ const Editor: FC = () => {
           if (elementType === 'character' || elementType === 'transition') {
             container.textContent = container.textContent.toUpperCase();
           } else {
-            container.textContent = capitalizeFirstLetter(container.textContent ?? '');
+            container.textContent = capitalizeFirstLetter(
+              container.textContent ?? ''
+            );
           }
         } else if (elementType === 'parenthetical') {
           container.textContent = '(' + (suggestions[0] ?? '') + ')';
@@ -660,7 +564,7 @@ const Editor: FC = () => {
   };
 
   // Function to update the screenplay JSON structure
-  const updateJSONStructure = () => {
+  const updateJSONStructure = useCallback(() => {
     if (!editorRef.current) return;
 
     const screenplayData: Screenplay = {
@@ -670,7 +574,7 @@ const Editor: FC = () => {
     let currentScene: Scene | null = null;
     let currentCharacter: string | null = null;
     let lineNum = 1;
-    let lastCharacterLines: string[] = [];
+    const lastCharacterLines: string[] = [];
 
     const elements = Array.from(editorRef.current.children) as HTMLElement[];
 
@@ -839,39 +743,75 @@ const Editor: FC = () => {
       return updatedProjects;
     });
     console.log('Updated screenplay data:', screenplayData);
-  };
+  }, [currentProjectId]);
 
   // Function to reconstruct editor content from screenplay data
-  const reconstructEditorContent = (data: Screenplay) => {
+  const reconstructEditorContent = useCallback((data: Screenplay) => {
     if (!editorRef.current) return;
 
     editorRef.current.innerHTML = ''; // Clear existing content
 
     // Collect all lines with their line_number
-    const allLines: { line_number: number; elementType: ElementType; text: string }[] = [];
+    const allLines: {
+      line_number: number;
+      elementType: ElementType;
+      text: string;
+    }[] = [];
 
     data.scenes.forEach((scene) => {
       if (scene.heading) {
-        allLines.push({ line_number: scene.heading.line_number, elementType: 'scene-heading', text: scene.heading.text });
+        allLines.push({
+          line_number: scene.heading.line_number,
+          elementType: 'scene-heading',
+          text: scene.heading.text,
+        });
       }
       scene.screen_actions.forEach((action) => {
-        allLines.push({ line_number: action.line_number, elementType: 'action', text: action.text });
+        allLines.push({
+          line_number: action.line_number,
+          elementType: 'action',
+          text: action.text,
+        });
       });
       scene.shots.forEach((shot) => {
-        allLines.push({ line_number: shot.line_number, elementType: 'shot', text: shot.text });
+        allLines.push({
+          line_number: shot.line_number,
+          elementType: 'shot',
+          text: shot.text,
+        });
       });
       scene.notes.forEach((note) => {
-        allLines.push({ line_number: note.line_number, elementType: 'note', text: note.text });
+        allLines.push({
+          line_number: note.line_number,
+          elementType: 'note',
+          text: note.text,
+        });
       });
       scene.dialogues.forEach((dialogue) => {
-        allLines.push({ line_number: dialogue.line.line_number, elementType: 'character', text: dialogue.character });
-        allLines.push({ line_number: dialogue.line.line_number, elementType: 'dialogue', text: dialogue.line.text });
+        allLines.push({
+          line_number: dialogue.line.line_number,
+          elementType: 'character',
+          text: dialogue.character,
+        });
+        allLines.push({
+          line_number: dialogue.line.line_number,
+          elementType: 'dialogue',
+          text: dialogue.line.text,
+        });
       });
       scene.parentheticals.forEach((parenthetical) => {
-        allLines.push({ line_number: parenthetical.line.line_number, elementType: 'parenthetical', text: parenthetical.line.text });
+        allLines.push({
+          line_number: parenthetical.line.line_number,
+          elementType: 'parenthetical',
+          text: parenthetical.line.text,
+        });
       });
       scene.transitions.forEach((transition) => {
-        allLines.push({ line_number: transition.line_number, elementType: 'transition', text: transition.text });
+        allLines.push({
+          line_number: transition.line_number,
+          elementType: 'transition',
+          text: transition.text,
+        });
       });
     });
 
@@ -884,7 +824,7 @@ const Editor: FC = () => {
     });
 
     console.log('Reconstructed editor content from screenplay data.');
-  };
+  }, []);
 
   // Function to copy formatted text to clipboard
   const copyToClipboard = () => {
@@ -900,11 +840,12 @@ const Editor: FC = () => {
         return;
       }
 
-      let text = element.textContent?.trim() ?? '';
+      const text = element.textContent?.trim() ?? '';
 
       switch (elementType) {
         case 'scene-heading':
-          formattedText += (lastElementType ? '\n\n' : '') + text.toUpperCase() + '\n';
+          formattedText +=
+            (lastElementType ? '\n\n' : '') + text.toUpperCase() + '\n';
           break;
         case 'action':
           formattedText += (lastElementType ? '\n' : '') + text + '\n';
@@ -919,7 +860,8 @@ const Editor: FC = () => {
           formattedText += text + '\n';
           break;
         case 'transition':
-          formattedText += (lastElementType ? '\n' : '') + text.toUpperCase() + '\n\n';
+          formattedText +=
+            (lastElementType ? '\n' : '') + text.toUpperCase() + '\n\n';
           break;
         case 'shot':
           formattedText += (lastElementType ? '\n' : '') + text.toUpperCase() + '\n';
@@ -946,7 +888,7 @@ const Editor: FC = () => {
   };
 
   // Function to create a new project
-  const createNewProject = () => {
+  const createNewProject = useCallback(() => {
     const newProjectId = Date.now().toString();
     const newProject: Project = {
       id: newProjectId,
@@ -971,7 +913,7 @@ const Editor: FC = () => {
     }
     // Initialize with a scene heading
     createNewLine('scene-heading', 'FADE IN:');
-  };
+  }, [projects.length]);
 
   // Function to select a project
   const selectProject = (projectId: string) => {
@@ -981,19 +923,6 @@ const Editor: FC = () => {
       setScreenplay(project.screenplay);
       reconstructEditorContent(project.screenplay);
       console.log('Switched to project:', project);
-      // Set lineNumber to the highest line_number in JSON
-      const highestLine = Math.max(
-        ...project.screenplay.scenes.flatMap(scene => [
-          scene.heading?.line_number || 0,
-          ...scene.screen_actions.map(action => action.line_number),
-          ...scene.notes.map(note => note.line_number),
-          ...scene.shots.map(shot => shot.line_number),
-          ...scene.transitions.map(transition => transition.line_number),
-          ...scene.dialogues.map(dialogue => dialogue.line.line_number),
-          ...scene.parentheticals.map(parenthetical => parenthetical.line.line_number),
-        ])
-      );
-      setLineNumber(highestLine + 1);
     } else {
       console.error('Project not found:', projectId);
     }
@@ -1029,12 +958,56 @@ const Editor: FC = () => {
       });
       // Save to local storage
       localStorage.setItem('projects', JSON.stringify(updatedProjects));
-      console.log(`Updated project name for project ${projectId} to ${editedProjectName}`);
+      console.log(
+        `Updated project name for project ${projectId} to ${editedProjectName}`
+      );
       return updatedProjects;
     });
     setEditingProjectId(null);
     setEditedProjectName('');
   };
+
+  // Load projects from local storage on mount
+  useEffect(() => {
+    const savedProjects = localStorage.getItem('projects');
+    if (savedProjects) {
+      try {
+        const projectsData = JSON.parse(savedProjects) as Project[];
+        setProjects(projectsData);
+        if (projectsData.length > 0) {
+          const firstProject = projectsData[0];
+          if (firstProject) {
+            // Set the first project as the current project
+            setCurrentProjectId(firstProject.id);
+            setScreenplay(firstProject.screenplay);
+            reconstructEditorContent(firstProject.screenplay);
+            console.log('Loaded projects from local storage:', projectsData);
+          } else {
+            console.error('First project is undefined');
+            createNewProject();
+          }
+        } else {
+          console.log('No projects found in saved data');
+          createNewProject();
+        }
+      } catch (error) {
+        console.error('Failed to parse projects from local storage:', error);
+        // If parsing fails, create a new project
+        createNewProject();
+      }
+    } else {
+      // No projects, create a new one
+      createNewProject();
+    }
+  }, [createNewProject, reconstructEditorContent]);
+
+  // Auto-save JSON structure every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      updateJSONStructure();
+    }, 60000); // 60000 ms = 1 minute
+    return () => clearInterval(interval);
+  }, [screenplay, currentProjectId, updateJSONStructure]);
 
   return (
     <div className="flex flex-row h-full">
@@ -1049,13 +1022,18 @@ const Editor: FC = () => {
         </button>
         <ul>
           {projects.map((project) => (
-            <li key={project.id} className="mb-2 flex items-center justify-between">
+            <li
+              key={project.id}
+              className="mb-2 flex items-center justify-between"
+            >
               {editingProjectId === project.id ? (
                 <>
                   <input
                     type="text"
                     value={editedProjectName}
-                    onChange={(e) => setEditedProjectName(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                      setEditedProjectName(e.target.value)
+                    }
                     className="w-full px-2 py-1 text-black rounded"
                   />
                   <button
@@ -1070,14 +1048,18 @@ const Editor: FC = () => {
                 <>
                   <button
                     className={`w-full text-left ${
-                      project.id === currentProjectId ? 'font-bold underline' : ''
+                      project.id === currentProjectId
+                        ? 'font-bold underline'
+                        : ''
                     }`}
                     onClick={() => selectProject(project.id)}
                   >
                     {project.name}
                   </button>
                   <button
-                    onClick={() => handleEditProjectName(project.id, project.name)}
+                    onClick={() =>
+                      handleEditProjectName(project.id, project.name)
+                    }
                     className="ml-2 text-white hover:text-gray-300"
                     title="Edit Project Name"
                   >
@@ -1197,24 +1179,39 @@ const Editor: FC = () => {
                     let container = range.startContainer as HTMLElement | null;
 
                     // If the selection is a text node, get its parent element
-                    if (container && container.nodeType === Node.TEXT_NODE) {
+                    if (
+                      container &&
+                      container.nodeType === Node.TEXT_NODE
+                    ) {
                       container = container.parentElement;
                     }
 
                     // Traverse up to find a container that is a child of editorRef.current
-                    while (container && container.parentElement !== editorRef.current) {
+                    while (
+                      container?.parentElement &&
+                      container.parentElement !== editorRef.current
+                    ) {
                       container = container.parentElement;
                     }
 
-                    if (container && container.parentElement === editorRef.current) {
+                    if (
+                      container &&
+                      container.parentElement === editorRef.current
+                    ) {
                       container.textContent = suggestion;
                       // Apply capitalization based on element type
                       const elementType = getElementType(container);
                       if (elementType && elementType !== 'parenthetical') {
-                        if (elementType === 'character' || elementType === 'transition') {
-                          container.textContent = container.textContent.toUpperCase();
+                        if (
+                          elementType === 'character' ||
+                          elementType === 'transition'
+                        ) {
+                          container.textContent =
+                            container.textContent.toUpperCase();
                         } else {
-                          container.textContent = capitalizeFirstLetter(container.textContent ?? '');
+                          container.textContent = capitalizeFirstLetter(
+                            container.textContent ?? ''
+                          );
                         }
                       } else if (elementType === 'parenthetical') {
                         container.textContent = '(' + (suggestion ?? '') + ')';
