@@ -1,64 +1,18 @@
-// /app/screenplay-editor/Editor.tsx
-
 'use client';
 
 import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { FaPencilAlt, FaCheck } from 'react-icons/fa'; // Using react-icons for icons
-import type { FC } from 'react';
+import { Copy, Code, X, Users, Film } from 'lucide-react';
+import { ElementType, Screenplay, Project } from '../types';
+import { getElementType, capitalizeFirstLetter, createNewLine, loadDefaultProject } from '../utils';
+import EditorContent from '../components/EditorContent';
+import DebugToolbar from '../components/DebugToolbar';
+import CharacterModal from '../components/CharacterModal';
+import SceneModal from '../components/SceneModal';
+import JSONPasteModal from '../components/JSONPasteModal';
+import ProjectSidebar from '../components/ProjectSidebar';
+import Toolbar from '../components/Toolbar';
 
-// Define the types for screenplay elements
-type ElementType =
-  | 'scene-heading'
-  | 'action'
-  | 'dialogue'
-  | 'parenthetical'
-  | 'character'
-  | 'transition'
-  | 'shot'
-  | 'note';
-
-interface LineEntry {
-  line_number: number;
-  text: string;
-}
-
-interface DialogueEntry {
-  character: string;
-  line: LineEntry;
-}
-
-interface ParentheticalEntry {
-  character: string;
-  line: LineEntry;
-}
-
-interface Scene {
-  heading: LineEntry | null;
-  screen_actions: LineEntry[];
-  notes: LineEntry[];
-  shots: LineEntry[];
-  transitions: LineEntry[];
-  dialogues: DialogueEntry[];
-  parentheticals: ParentheticalEntry[];
-}
-
-interface Character {
-  name: string;
-  dialogue: LineEntry[];
-}
-
-interface Screenplay {
-  scenes: Scene[];
-  characters: Character[];
-}
-
-interface Project {
-  id: string;
-  name: string;
-  screenplay: Screenplay;
-}
-
-const Editor: FC = () => {
+const Editor: React.FC = () => {
   const editorRef = useRef<HTMLDivElement>(null);
   const [projects, setProjects] = useState<Project[]>([]);
   const [currentProjectId, setCurrentProjectId] = useState<string | null>(null);
@@ -71,137 +25,12 @@ const Editor: FC = () => {
   const [lastCharacters, setLastCharacters] = useState<string[]>([]);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [editedProjectName, setEditedProjectName] = useState('');
-
-  // Utility function to extract ElementType from classList
-  const getElementType = (element: HTMLElement): ElementType | null => {
-    const types: ElementType[] = [
-      'scene-heading',
-      'action',
-      'character',
-      'parenthetical',
-      'dialogue',
-      'transition',
-      'shot',
-      'note',
-    ];
-    for (const type of types) {
-      if (element.classList.contains(type)) {
-        return type;
-      }
-    }
-    return null;
-  };
-
-  // Utility function to capitalize first letter
-  const capitalizeFirstLetter = (text: string): string => {
-    if (!text) return text;
-    return text.charAt(0).toUpperCase() + text.slice(1);
-  };
-
-  // Function to create and insert a new line with specific formatting
-  const createNewLine = (
-    type: ElementType,
-    content: string = '',
-    referenceNode?: HTMLElement
-  ) => {
-    const newDiv = document.createElement('div');
-    newDiv.className = type;
-    // Auto-capitalize first letter except for parentheticals
-    if (type !== 'parenthetical') {
-      newDiv.textContent = capitalizeFirstLetter(content);
-    } else {
-      newDiv.textContent = '()';
-    }
-    newDiv.style.minHeight = '1em';
-    // Remove margin-bottom to eliminate vertical white space
-    newDiv.style.marginBottom = '0';
-    newDiv.style.boxSizing = 'border-box';
-    newDiv.style.width = '100%';
-
-    // Apply specific styles based on type using Tailwind classes
-    switch (type) {
-      case 'scene-heading':
-        newDiv.classList.add(
-          'pl-[5%]',
-          'font-bold',
-          'uppercase',
-          'bg-green-200',
-          'bg-opacity-50'
-        );
-        break;
-      case 'action':
-        newDiv.classList.add('pl-[5%]', 'bg-yellow-200', 'bg-opacity-50');
-        break;
-      case 'character':
-        newDiv.classList.add(
-          'pl-[0%]',
-          'text-center',
-          'uppercase',
-          'bg-blue-200',
-          'bg-opacity-50'
-        );
-        break;
-      case 'parenthetical':
-        newDiv.classList.add('pl-[25%]', 'bg-pink-200', 'bg-opacity-50');
-        newDiv.textContent = '()';
-        break;
-      case 'dialogue':
-        newDiv.classList.add(
-          'pl-[33%]',
-          'pr-[33%]',
-          'bg-red-200',
-          'bg-opacity-50'
-        );
-        break;
-      case 'transition':
-        newDiv.classList.add(
-          'pr-[5%]',
-          'text-right',
-          'uppercase',
-          'bg-purple-200',
-          'bg-opacity-50'
-        );
-        break;
-      case 'shot':
-        newDiv.classList.add(
-          'pl-[5%]',
-          'uppercase',
-          'bg-orange-200',
-          'bg-opacity-50'
-        );
-        break;
-      case 'note':
-        newDiv.classList.add(
-          'pl-[5%]',
-          'italic',
-          'bg-gray-300',
-          'bg-opacity-50'
-        );
-        break;
-      default:
-        break;
-    }
-
-    // Insert the new line into the editor
-    if (editorRef.current) {
-      if (referenceNode && editorRef.current.contains(referenceNode)) {
-        editorRef.current.insertBefore(newDiv, referenceNode.nextSibling);
-      } else {
-        editorRef.current.appendChild(newDiv);
-      }
-      // Move cursor to the new line
-      const range = document.createRange();
-      range.selectNodeContents(newDiv);
-      range.collapse(true);
-      const selection = window.getSelection();
-      if (selection) {
-        selection.removeAllRanges();
-        selection.addRange(range);
-      }
-    } else {
-      console.error('Editor reference is null.');
-    }
-  };
+  
+  // Modal states
+  const [characterModalOpen, setCharacterModalOpen] = useState(false);
+  const [sceneModalOpen, setSceneModalOpen] = useState(false);
+  const [fullJSONModalOpen, setFullJSONModalOpen] = useState(false);
+  const [pasteJSONModalOpen, setPasteJSONModalOpen] = useState(false);
 
   // Function to apply formatting based on class name
   const applyFormatting = (className: ElementType) => {
@@ -211,12 +40,10 @@ const Editor: FC = () => {
     const range = selection.getRangeAt(0);
     let container = range.startContainer as HTMLElement | null;
 
-    // If the selection is a text node, get its parent element
     if (container && container.nodeType === Node.TEXT_NODE) {
       container = container.parentElement;
     }
 
-    // Traverse up to find a container that is a child of editorRef.current
     while (
       container &&
       container.parentElement &&
@@ -226,164 +53,65 @@ const Editor: FC = () => {
     }
 
     if (!container || container.parentElement !== editorRef.current) {
-      // No container found, create a new line at the current cursor position
-      const referenceNode =
-        range.startContainer.nodeType === Node.TEXT_NODE
-          ? (range.startContainer.parentNode as HTMLElement | null)
-          : (range.startContainer as HTMLElement | null);
-      if (referenceNode && editorRef.current?.contains(referenceNode)) {
-        // Auto-capitalize first letter if not parenthetical
-        const content =
-          className !== 'parenthetical' ? capitalizeFirstLetter('') : '';
-        createNewLine(className, content, referenceNode);
-        return;
-      }
-
-      // If we can't find a reference node, append at the end
-      const content =
-        className !== 'parenthetical' ? capitalizeFirstLetter('') : '';
-      createNewLine(className, content);
+      const content = className !== 'parenthetical' ? capitalizeFirstLetter('') : '';
+      createNewLine(editorRef, className, content);
       return;
     }
 
-    // Apply the formatting class
+    const text = container.textContent?.trim() ?? '';
     container.className = className;
 
-    // Remove all previous formatting classes
-    const formattingClasses = [
-      'pl-[5%]',
-      'font-bold',
-      'uppercase',
-      'bg-green-200',
-      'bg-opacity-50',
-      'bg-yellow-200',
-      'bg-opacity-50',
-      'pl-[23%]',
-      'text-center',
-      'uppercase',
-      'bg-blue-200',
-      'bg-opacity-50',
-      'pl-[25%]',
-      'bg-pink-200',
-      'bg-opacity-50',
-      'pl-[20%]',
-      'pr-[20%]',
-      'bg-red-200',
-      'bg-opacity-50',
-      'pr-[5%]',
-      'text-right',
-      'uppercase',
-      'bg-purple-200',
-      'bg-opacity-50',
-      'pl-[5%]',
-      'uppercase',
-      'bg-orange-200',
-      'bg-opacity-50',
-      'pl-[5%]',
-      'italic',
-      'bg-gray-300',
-      'bg-opacity-50',
-    ];
+    const newDiv = document.createElement('div');
+    newDiv.className = className;
+    newDiv.style.minHeight = '1.5em';
+    newDiv.style.marginBottom = '0.25rem';
+    newDiv.style.padding = '0.5rem';
+    newDiv.style.borderRadius = '0.375rem';
+    newDiv.style.transition = 'all 0.2s ease-in-out';
 
-    formattingClasses.forEach((cls) => container!.classList.remove(cls));
+    const styleClasses = {
+      'scene-heading': ['ml-[5%]', 'mr-[5%]', 'font-bold', 'uppercase', 'bg-gradient-to-r', 'from-green-100', 'to-green-200', 'border-l-4', 'border-green-500', 'text-green-900'],
+      'action': ['ml-[5%]', 'mr-[5%]', 'bg-gradient-to-r', 'from-blue-50', 'to-blue-100', 'border-l-4', 'border-blue-400', 'text-blue-900'],
+      'character': ['mx-auto', 'w-fit', 'uppercase', 'font-semibold', 'text-center', 'bg-gradient-to-r', 'from-purple-100', 'to-purple-200', 'border-l-4', 'border-purple-500', 'text-purple-900'],
+      'parenthetical': ['ml-[25%]', 'mr-[25%]', 'italic', 'bg-gradient-to-r', 'from-pink-50', 'to-pink-100', 'border-l-4', 'border-pink-400', 'text-pink-800'],
+      'dialogue': ['ml-[20%]', 'mr-[20%]', 'bg-gradient-to-r', 'from-slate-50', 'to-slate-100', 'border-l-4', 'border-slate-400', 'text-slate-800'],
+      'transition': ['ml-[60%]', 'mr-[5%]', 'text-right', 'uppercase', 'font-semibold', 'bg-gradient-to-r', 'from-amber-100', 'to-amber-200', 'border-l-4', 'border-amber-500', 'text-amber-900'],
+      'shot': ['ml-[5%]', 'mr-[5%]', 'uppercase', 'font-medium', 'bg-gradient-to-r', 'from-orange-100', 'to-orange-200', 'border-l-4', 'border-orange-500', 'text-orange-900'],
+      'note': ['ml-[5%]', 'mr-[5%]', 'italic', 'bg-gradient-to-r', 'from-gray-100', 'to-gray-200', 'border-l-4', 'border-gray-400', 'text-gray-700']
+    };
 
-    // Re-apply classes based on the new formatting
+    newDiv.classList.add(...(styleClasses[className] || []));
+
     switch (className) {
       case 'scene-heading':
-        container.classList.add(
-          'pl-[5%]',
-          'font-bold',
-          'uppercase',
-          'bg-green-200',
-          'bg-opacity-50'
-        );
-        // Capitalize the text
-        container.textContent = (container.textContent ?? '').toUpperCase();
-        break;
-      case 'action':
-        container.classList.add('pl-[5%]', 'bg-yellow-200', 'bg-opacity-50');
-        container.textContent = capitalizeFirstLetter(
-          container.textContent ?? ''
-        );
-        break;
       case 'character':
-        container.classList.add(
-          'pl-[23%]',
-          'text-center',
-          'uppercase',
-          'bg-blue-200',
-          'bg-opacity-50'
-        );
-        container.textContent = (container.textContent ?? '').toUpperCase();
+      case 'transition':
+      case 'shot':
+        newDiv.textContent = text.toUpperCase();
         break;
       case 'parenthetical':
-        container.classList.add('pl-[25%]', 'bg-pink-200', 'bg-opacity-50');
-        // Wrap existing content with parentheses
-        let textContent = container.textContent ?? '';
-        // Remove existing parentheses if any
-        textContent = textContent.replace(/^\(|\)$/g, '');
-        container.textContent = '(' + textContent + ')';
-        // Move cursor inside the parentheses
-        const textNode = container.firstChild;
-        if (textNode && textNode.nodeType === Node.TEXT_NODE) {
-          const pos = 1;
-          const newRange = document.createRange();
-          newRange.setStart(textNode, pos);
-          newRange.setEnd(textNode, pos + textContent.length);
-          selection.removeAllRanges();
-          selection.addRange(newRange);
-        }
+        const cleanText = text.replace(/^\(|\)$/g, '');
+        newDiv.textContent = '(' + cleanText + ')';
         break;
+      case 'action':
       case 'dialogue':
-        container.classList.add(
-          'pl-[20%]',
-          'pr-[20%]',
-          'bg-red-200',
-          'bg-opacity-50'
-        );
-        container.textContent = capitalizeFirstLetter(
-          container.textContent ?? ''
-        );
-        break;
-      case 'transition':
-        container.classList.add(
-          'pr-[5%]',
-          'text-right',
-          'uppercase',
-          'bg-purple-200',
-          'bg-opacity-50'
-        );
-        container.textContent = (container.textContent ?? '').toUpperCase();
-        break;
-      case 'shot':
-        container.classList.add(
-          'pl-[5%]',
-          'uppercase',
-          'bg-orange-200',
-          'bg-opacity-50'
-        );
-        container.textContent = (container.textContent ?? '').toUpperCase();
-        break;
       case 'note':
-        container.classList.add(
-          'pl-[5%]',
-          'italic',
-          'bg-gray-300',
-          'bg-opacity-50'
-        );
-        container.textContent = capitalizeFirstLetter(
-          container.textContent ?? ''
-        );
+        newDiv.textContent = capitalizeFirstLetter(text);
         break;
       default:
+        newDiv.textContent = text;
         break;
     }
 
-    // Set cursor position
-    selection.removeAllRanges();
-    selection.addRange(range);
+    if (container.parentElement) {
+      container.parentElement.replaceChild(newDiv, container);
+    }
 
-    console.log(`Applied formatting: ${className}`);
+    const newRange = document.createRange();
+    newRange.selectNodeContents(newDiv);
+    newRange.collapse(false);
+    selection.removeAllRanges();
+    selection.addRange(newRange);
   };
 
   // Function to handle the Enter key behavior
@@ -397,12 +125,10 @@ const Editor: FC = () => {
     const range = selection.getRangeAt(0);
     let container = range.startContainer as HTMLElement | null;
 
-    // If the selection is a text node, get its parent element
     if (container && container.nodeType === Node.TEXT_NODE) {
       container = container.parentElement;
     }
 
-    // Traverse up to find a container that is a child of editorRef.current
     while (
       container?.parentElement &&
       container.parentElement !== editorRef.current
@@ -411,8 +137,7 @@ const Editor: FC = () => {
     }
 
     if (!container || container.parentElement !== editorRef.current) {
-      // If no specific line is selected, default to action
-      createNewLine('action', capitalizeFirstLetter(''));
+      createNewLine(editorRef, 'action', capitalizeFirstLetter(''));
       return;
     }
 
@@ -424,7 +149,6 @@ const Editor: FC = () => {
     ) {
       newClass = 'dialogue';
     } else if (container.classList.contains('dialogue')) {
-      // Default new line after dialogue to action
       newClass = 'action';
     } else if (container.classList.contains('transition')) {
       newClass = 'scene-heading';
@@ -432,10 +156,7 @@ const Editor: FC = () => {
       newClass = 'action';
     }
 
-    // Create and insert the new line after the current line
-    createNewLine(newClass, capitalizeFirstLetter(''), container);
-
-    console.log(`Inserted new line with type: ${newClass}`);
+    createNewLine(editorRef, newClass, capitalizeFirstLetter(''), container);
   };
 
   // Function to handle input events
@@ -443,7 +164,6 @@ const Editor: FC = () => {
     const target = e.target as HTMLElement;
     const text = target.textContent?.trim() ?? '';
 
-    // Handle suggestions for scene headings and character names
     if (target.classList.contains('scene-heading')) {
       const sceneHeadings = screenplay.scenes
         .map((scene) => scene.heading?.text ?? '')
@@ -458,7 +178,6 @@ const Editor: FC = () => {
       const characterNames = screenplay.characters.map((char) => char.name ?? '');
       const uniqueNames = Array.from(new Set(characterNames));
 
-      // Suggest second last used character
       const topSuggestion =
         lastCharacters.length >= 2 ? lastCharacters[lastCharacters.length - 2] : '';
       const filteredSuggestions = uniqueNames.filter((name) =>
@@ -475,7 +194,6 @@ const Editor: FC = () => {
       setShowSuggestions(false);
     }
 
-    // Update the JSON structure
     updateJSONStructure();
   };
 
@@ -485,48 +203,32 @@ const Editor: FC = () => {
       handleEnter(e);
     } else if (e.altKey) {
       e.preventDefault();
-      switch (e.key) {
-        case '1':
-          applyFormatting('scene-heading');
-          break;
-        case '2':
-          applyFormatting('action');
-          break;
-        case '3':
-          applyFormatting('character');
-          break;
-        case '4':
-          applyFormatting('parenthetical');
-          break;
-        case '5':
-          applyFormatting('dialogue');
-          break;
-        case '6':
-          applyFormatting('transition');
-          break;
-        case '7':
-          applyFormatting('shot');
-          break;
-        case '8':
-          applyFormatting('note');
-          break;
-        default:
-          break;
+      const keyMap: { [key: string]: ElementType } = {
+        '1': 'scene-heading',
+        '2': 'action',
+        '3': 'character',
+        '4': 'parenthetical',
+        '5': 'dialogue',
+        '6': 'transition',
+        '7': 'shot',
+        '8': 'note'
+      };
+      if (keyMap[e.key]) {
+        applyFormatting(keyMap[e.key]!);
       }
     } else if (e.key === 'Tab' && showSuggestions && suggestions.length > 0) {
       e.preventDefault();
+      // Tab autocomplete logic
       const selection = window.getSelection();
       if (!selection || selection.rangeCount === 0) return;
 
       const range = selection.getRangeAt(0);
       let container = range.startContainer as HTMLElement | null;
 
-      // If the selection is a text node, get its parent element
       if (container && container.nodeType === Node.TEXT_NODE) {
         container = container.parentElement;
       }
 
-      // Traverse up to find a container that is a child of editorRef.current
       while (
         container?.parentElement &&
         container.parentElement !== editorRef.current
@@ -535,9 +237,7 @@ const Editor: FC = () => {
       }
 
       if (container && container.parentElement === editorRef.current) {
-        // Replace the text with the top suggestion
         container.textContent = suggestions[0] ?? '';
-        // Apply capitalization based on element type
         const elementType = getElementType(container);
         if (elementType && elementType !== 'parenthetical') {
           if (elementType === 'character' || elementType === 'transition') {
@@ -551,14 +251,12 @@ const Editor: FC = () => {
           container.textContent = '(' + (suggestions[0] ?? '') + ')';
         }
 
-        // Move cursor to the end of the text
         const newRange = document.createRange();
         newRange.selectNodeContents(container);
         newRange.collapse(false);
         selection.removeAllRanges();
         selection.addRange(newRange);
         setShowSuggestions(false);
-        console.log(`Autocompleted with suggestion: ${suggestions[0]}`);
       }
     }
   };
@@ -571,7 +269,7 @@ const Editor: FC = () => {
       scenes: [],
       characters: [],
     };
-    let currentScene: Scene | null = null;
+    let currentScene: any = null;
     let currentCharacter: string | null = null;
     let lineNum = 1;
     const lastCharacterLines: string[] = [];
@@ -580,14 +278,10 @@ const Editor: FC = () => {
 
     for (const element of elements) {
       const elementType = getElementType(element);
-      if (!elementType) {
-        console.warn('Unknown element type:', element);
-        continue; // Skip unknown elements
-      }
+      if (!elementType) continue;
 
       let text = element.textContent?.trim() ?? '';
 
-      // Adjust text based on formatting for JSON storage
       switch (elementType) {
         case 'scene-heading':
         case 'character':
@@ -600,17 +294,13 @@ const Editor: FC = () => {
         case 'note':
           text = capitalizeFirstLetter(text);
           break;
-        // Parentheticals are handled separately
-        default:
-          break;
       }
 
-      // Remove parentheses for parentheticals
       if (elementType === 'parenthetical') {
         text = text.replace(/^\(|\)$/g, '');
       }
 
-      const newEntry: LineEntry = { line_number: lineNum++, text };
+      const newEntry = { line_number: lineNum++, text };
 
       switch (elementType) {
         case 'scene-heading':
@@ -684,28 +374,25 @@ const Editor: FC = () => {
             screenplayData.scenes.push(currentScene);
           }
           currentScene.transitions.push(newEntry);
-          // Start a new scene after transition
           currentScene = null;
           break;
         case 'character':
           currentCharacter = text;
           lastCharacterLines.push(text);
-          // Add character if not already present
-          if (!screenplayData.characters.find((c) => c.name === text)) {
+          if (!screenplayData.characters.find((c: any) => c.name === text)) {
             screenplayData.characters.push({ name: text, dialogue: [] });
           }
           break;
         case 'dialogue':
           if (currentCharacter && currentScene) {
-            const dialogueEntry: DialogueEntry = {
+            const dialogueEntry = {
               character: currentCharacter,
               line: newEntry,
             };
             currentScene.dialogues.push(dialogueEntry);
 
-            // Add to character's dialogue
             const character = screenplayData.characters.find(
-              (c) => c.name === currentCharacter
+              (c: any) => c.name === currentCharacter
             );
             if (character) {
               character.dialogue.push(newEntry);
@@ -714,14 +401,12 @@ const Editor: FC = () => {
           break;
         case 'parenthetical':
           if (currentCharacter && currentScene) {
-            const parentheticalEntry: ParentheticalEntry = {
+            const parentheticalEntry = {
               character: currentCharacter,
               line: newEntry,
             };
             currentScene.parentheticals.push(parentheticalEntry);
           }
-          break;
-        default:
           break;
       }
     }
@@ -729,7 +414,6 @@ const Editor: FC = () => {
     setScreenplay(screenplayData);
     setLastCharacters(lastCharacterLines);
 
-    // Update the current project
     setProjects((prevProjects) => {
       const updatedProjects = prevProjects.map((project) => {
         if (project.id === currentProjectId) {
@@ -737,21 +421,17 @@ const Editor: FC = () => {
         }
         return project;
       });
-      // Save to local storage
       localStorage.setItem('projects', JSON.stringify(updatedProjects));
-      console.log('Updated projects in local storage:', updatedProjects);
       return updatedProjects;
     });
-    console.log('Updated screenplay data:', screenplayData);
   }, [currentProjectId]);
 
   // Function to reconstruct editor content from screenplay data
   const reconstructEditorContent = useCallback((data: Screenplay) => {
     if (!editorRef.current) return;
 
-    editorRef.current.innerHTML = ''; // Clear existing content
+    editorRef.current.innerHTML = '';
 
-    // Collect all lines with their line_number
     const allLines: {
       line_number: number;
       elementType: ElementType;
@@ -766,28 +446,28 @@ const Editor: FC = () => {
           text: scene.heading.text,
         });
       }
-      scene.screen_actions.forEach((action) => {
+      scene.screen_actions.forEach((action: any) => {
         allLines.push({
           line_number: action.line_number,
           elementType: 'action',
           text: action.text,
         });
       });
-      scene.shots.forEach((shot) => {
+      scene.shots.forEach((shot: any) => {
         allLines.push({
           line_number: shot.line_number,
           elementType: 'shot',
           text: shot.text,
         });
       });
-      scene.notes.forEach((note) => {
+      scene.notes.forEach((note: any) => {
         allLines.push({
           line_number: note.line_number,
           elementType: 'note',
           text: note.text,
         });
       });
-      scene.dialogues.forEach((dialogue) => {
+      scene.dialogues.forEach((dialogue: any) => {
         allLines.push({
           line_number: dialogue.line.line_number,
           elementType: 'character',
@@ -799,14 +479,14 @@ const Editor: FC = () => {
           text: dialogue.line.text,
         });
       });
-      scene.parentheticals.forEach((parenthetical) => {
+      scene.parentheticals.forEach((parenthetical: any) => {
         allLines.push({
           line_number: parenthetical.line.line_number,
           elementType: 'parenthetical',
           text: parenthetical.line.text,
         });
       });
-      scene.transitions.forEach((transition) => {
+      scene.transitions.forEach((transition: any) => {
         allLines.push({
           line_number: transition.line_number,
           elementType: 'transition',
@@ -815,15 +495,11 @@ const Editor: FC = () => {
       });
     });
 
-    // Sort allLines by line_number
     allLines.sort((a, b) => a.line_number - b.line_number);
 
-    // Render lines in sorted order
     allLines.forEach((line) => {
-      createNewLine(line.elementType, line.text);
+      createNewLine(editorRef, line.elementType, line.text);
     });
-
-    console.log('Reconstructed editor content from screenplay data.');
   }, []);
 
   // Function to copy formatted text to clipboard
@@ -835,17 +511,13 @@ const Editor: FC = () => {
 
     Array.from(editorRef.current.children).forEach((element) => {
       const elementType = getElementType(element as HTMLElement);
-      if (!elementType) {
-        console.warn('Unknown element type during copy:', element);
-        return;
-      }
+      if (!elementType) return;
 
       const text = element.textContent?.trim() ?? '';
 
       switch (elementType) {
         case 'scene-heading':
-          formattedText +=
-            (lastElementType ? '\n\n' : '') + text.toUpperCase() + '\n';
+          formattedText += (lastElementType ? '\n\n' : '') + text.toUpperCase() + '\n';
           break;
         case 'action':
           formattedText += (lastElementType ? '\n' : '') + text + '\n';
@@ -860,8 +532,7 @@ const Editor: FC = () => {
           formattedText += text + '\n';
           break;
         case 'transition':
-          formattedText +=
-            (lastElementType ? '\n' : '') + text.toUpperCase() + '\n\n';
+          formattedText += (lastElementType ? '\n' : '') + text.toUpperCase() + '\n\n';
           break;
         case 'shot':
           formattedText += (lastElementType ? '\n' : '') + text.toUpperCase() + '\n';
@@ -869,51 +540,35 @@ const Editor: FC = () => {
         case 'note':
           formattedText += (lastElementType ? '\n' : '') + text + '\n';
           break;
-        default:
-          break;
       }
       lastElementType = elementType;
     });
 
-    navigator.clipboard
-      .writeText(formattedText)
-      .then(() => {
-        alert('Screenplay copied to clipboard!');
-        console.log('Copied screenplay to clipboard.');
-      })
-      .catch(() => {
-        alert('Failed to copy screenplay.');
-        console.error('Failed to copy screenplay to clipboard.');
-      });
+    navigator.clipboard.writeText(formattedText).then(() => {
+      alert('Screenplay copied to clipboard!');
+    }).catch(() => {
+      alert('Failed to copy screenplay.');
+    });
   };
 
   // Function to create a new project
-  const createNewProject = useCallback(() => {
+  const createNewProject = useCallback(async () => {
+    const defaultScreenplay = await loadDefaultProject();
     const newProjectId = Date.now().toString();
     const newProject: Project = {
       id: newProjectId,
-      name: `Project ${projects.length + 1}`,
-      screenplay: {
-        scenes: [],
-        characters: [],
-      },
+      name: projects.length === 0 ? 'Default Project' : `Project ${projects.length + 1}`,
+      screenplay: defaultScreenplay,
     };
     setProjects((prevProjects) => {
       const updatedProjects = [...prevProjects, newProject];
-      // Save to local storage
       localStorage.setItem('projects', JSON.stringify(updatedProjects));
-      console.log('Created new project:', newProject);
       return updatedProjects;
     });
     setCurrentProjectId(newProjectId);
     setScreenplay(newProject.screenplay);
-    // Clear editor content
-    if (editorRef.current) {
-      editorRef.current.innerHTML = '';
-    }
-    // Initialize with a scene heading
-    createNewLine('scene-heading', 'FADE IN:');
-  }, [projects.length]);
+    reconstructEditorContent(newProject.screenplay);
+  }, [projects.length, reconstructEditorContent]);
 
   // Function to select a project
   const selectProject = (projectId: string) => {
@@ -922,9 +577,6 @@ const Editor: FC = () => {
       setCurrentProjectId(projectId);
       setScreenplay(project.screenplay);
       reconstructEditorContent(project.screenplay);
-      console.log('Switched to project:', project);
-    } else {
-      console.error('Project not found:', projectId);
     }
   };
 
@@ -932,18 +584,58 @@ const Editor: FC = () => {
   const saveJSONToLocalStorage = () => {
     updateJSONStructure();
     alert('Screenplay JSON structure saved to local storage.');
-    console.log('Screenplay JSON structure saved to local storage.');
   };
 
-  // Function to handle project name edit initiation
+  // Function to handle JSON paste
+  const handleJSONPaste = (jsonText: string) => {
+    try {
+      const parsedData = JSON.parse(jsonText) as Screenplay;
+      setScreenplay(parsedData);
+      reconstructEditorContent(parsedData);
+      
+      // Update current project
+      setProjects((prevProjects) => {
+        const updatedProjects = prevProjects.map((project) => {
+          if (project.id === currentProjectId) {
+            return { ...project, screenplay: parsedData };
+          }
+          return project;
+        });
+        localStorage.setItem('projects', JSON.stringify(updatedProjects));
+        return updatedProjects;
+      });
+      
+      alert('JSON imported successfully!');
+    } catch (error) {
+      alert('Failed to import JSON. Please check the format.');
+    }
+  };
+
+  // Function to handle screenplay updates from modals
+  const handleUpdateScreenplay = (updatedScreenplay: Screenplay) => {
+    setScreenplay(updatedScreenplay);
+    reconstructEditorContent(updatedScreenplay);
+    
+    // Update current project
+    setProjects((prevProjects) => {
+      const updatedProjects = prevProjects.map((project) => {
+        if (project.id === currentProjectId) {
+          return { ...project, screenplay: updatedScreenplay };
+        }
+        return project;
+      });
+      localStorage.setItem('projects', JSON.stringify(updatedProjects));
+      return updatedProjects;
+    });
+  };
+
+  // Project management functions
   const handleEditProjectName = (projectId: string, currentName: string) => {
     setEditingProjectId(projectId);
     setEditedProjectName(currentName);
   };
 
-  // Function to handle project name save
   const handleSaveProjectName = (projectId: string) => {
-    // Prevent empty project names
     if (editedProjectName.trim() === '') {
       alert('Project name cannot be empty.');
       return;
@@ -956,11 +648,7 @@ const Editor: FC = () => {
         }
         return project;
       });
-      // Save to local storage
       localStorage.setItem('projects', JSON.stringify(updatedProjects));
-      console.log(
-        `Updated project name for project ${projectId} to ${editedProjectName}`
-      );
       return updatedProjects;
     });
     setEditingProjectId(null);
@@ -977,26 +665,19 @@ const Editor: FC = () => {
         if (projectsData.length > 0) {
           const firstProject = projectsData[0];
           if (firstProject) {
-            // Set the first project as the current project
             setCurrentProjectId(firstProject.id);
             setScreenplay(firstProject.screenplay);
             reconstructEditorContent(firstProject.screenplay);
-            console.log('Loaded projects from local storage:', projectsData);
           } else {
-            console.error('First project is undefined');
             createNewProject();
           }
         } else {
-          console.log('No projects found in saved data');
           createNewProject();
         }
       } catch (error) {
-        console.error('Failed to parse projects from local storage:', error);
-        // If parsing fails, create a new project
         createNewProject();
       }
     } else {
-      // No projects, create a new one
       createNewProject();
     }
   }, [createNewProject, reconstructEditorContent]);
@@ -1005,236 +686,202 @@ const Editor: FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       updateJSONStructure();
-    }, 60000); // 60000 ms = 1 minute
+    }, 60000);
     return () => clearInterval(interval);
   }, [screenplay, currentProjectId, updateJSONStructure]);
 
   return (
-    <div className="flex flex-row h-full">
-      {/* Project List Sidebar */}
-      <div className="w-64 bg-gray-800 text-white p-2">
-        <h2 className="text-xl font-bold mb-4">Projects</h2>
-        <button
-          className="w-full mb-2 px-2 py-1 bg-green-600 rounded hover:bg-green-700"
-          onClick={createNewProject}
-        >
-          New Project
-        </button>
-        <ul>
-          {projects.map((project) => (
-            <li
-              key={project.id}
-              className="mb-2 flex items-center justify-between"
-            >
-              {editingProjectId === project.id ? (
-                <>
-                  <input
-                    type="text"
-                    value={editedProjectName}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                      setEditedProjectName(e.target.value)
-                    }
-                    className="w-full px-2 py-1 text-black rounded"
-                  />
+    <div className="flex flex-col h-full">
+      {/* Debug Toolbar */}
+      <DebugToolbar
+        onOpenCharacterModal={() => setCharacterModalOpen(true)}
+        onOpenSceneModal={() => setSceneModalOpen(true)}
+        onOpenFullJSON={() => setFullJSONModalOpen(true)}
+        onPasteJSON={() => setPasteJSONModalOpen(true)}
+      />
+
+      <div className="flex flex-row flex-1 overflow-hidden">
+        <ProjectSidebar
+          projects={projects}
+          currentProjectId={currentProjectId}
+          editingProjectId={editingProjectId}
+          editedProjectName={editedProjectName}
+          onCreateNewProject={createNewProject}
+          onSelectProject={selectProject}
+          onEditProjectName={handleEditProjectName}
+          onSaveProjectName={handleSaveProjectName}
+          setEditedProjectName={setEditedProjectName}
+        />
+
+        <div className="flex flex-col flex-grow">
+          <Toolbar
+            onApplyFormatting={applyFormatting}
+            onSave={saveJSONToLocalStorage}
+            onCopy={copyToClipboard}
+          />
+
+          <div className="relative flex-grow bg-white dark:bg-slate-900">
+            <EditorContent
+              ref={editorRef}
+              className="absolute inset-0 p-6 overflow-y-auto"
+              onKeyDown={handleKeyDown}
+              onInput={handleInput}
+            />
+            
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="absolute top-4 left-6 z-50 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-lg shadow-lg max-w-xs">
+                {suggestions.map((suggestion, index) => (
                   <button
-                    onClick={() => handleSaveProjectName(project.id)}
-                    className="ml-2 text-green-500 hover:text-green-700"
-                    title="Save Project Name"
-                  >
-                    <FaCheck />
-                  </button>
-                </>
-              ) : (
-                <>
-                  <button
-                    className={`w-full text-left ${
-                      project.id === currentProjectId
-                        ? 'font-bold underline'
-                        : ''
-                    }`}
-                    onClick={() => selectProject(project.id)}
-                  >
-                    {project.name}
-                  </button>
-                  <button
-                    onClick={() =>
-                      handleEditProjectName(project.id, project.name)
-                    }
-                    className="ml-2 text-white hover:text-gray-300"
-                    title="Edit Project Name"
-                  >
-                    <FaPencilAlt />
-                  </button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      </div>
+                    key={index}
+                    className="w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors text-sm border-b border-slate-100 dark:border-slate-700 last:border-b-0 first:rounded-t-lg last:rounded-b-lg"
+                    onClick={() => {
+                      const selection = window.getSelection();
+                      if (!selection || selection.rangeCount === 0) return;
 
-      {/* Main Editor Container */}
-      <div className="flex flex-col flex-grow">
-        {/* Toolbar */}
-        <div className="flex items-center bg-gray-800 text-white p-2 space-x-2">
-          {/* Formatting Buttons */}
-          <button
-            className="px-3 py-1 bg-green-600 rounded hover:bg-green-700"
-            onClick={() => applyFormatting('scene-heading')}
-            title="Scene Heading (Alt + 1)"
-          >
-            Scene Heading
-          </button>
-          <button
-            className="px-3 py-1 bg-yellow-600 rounded hover:bg-yellow-700"
-            onClick={() => applyFormatting('action')}
-            title="Action (Alt + 2)"
-          >
-            Action
-          </button>
-          <button
-            className="px-3 py-1 bg-blue-600 rounded hover:bg-blue-700"
-            onClick={() => applyFormatting('character')}
-            title="Character (Alt + 3)"
-          >
-            Character
-          </button>
-          <button
-            className="px-3 py-1 bg-pink-600 rounded hover:bg-pink-700"
-            onClick={() => applyFormatting('parenthetical')}
-            title="Parenthetical (Alt + 4)"
-          >
-            Parenthetical
-          </button>
-          <button
-            className="px-3 py-1 bg-red-600 rounded hover:bg-red-700"
-            onClick={() => applyFormatting('dialogue')}
-            title="Dialogue (Alt + 5)"
-          >
-            Dialogue
-          </button>
-          <button
-            className="px-3 py-1 bg-purple-600 rounded hover:bg-purple-700"
-            onClick={() => applyFormatting('transition')}
-            title="Transition (Alt + 6)"
-          >
-            Transition
-          </button>
-          <button
-            className="px-3 py-1 bg-orange-600 rounded hover:bg-orange-700"
-            onClick={() => applyFormatting('shot')}
-            title="Shot (Alt + 7)"
-          >
-            Shot
-          </button>
-          <button
-            className="px-3 py-1 bg-gray-600 rounded hover:bg-gray-700"
-            onClick={() => applyFormatting('note')}
-            title="Note (Alt + 8)"
-          >
-            Note
-          </button>
+                      const range = selection.getRangeAt(0);
+                      let container = range.startContainer as HTMLElement | null;
 
-          {/* Spacer */}
-          <div className="flex-grow"></div>
-
-          {/* Save and Copy Buttons */}
-          <button
-            className="px-4 py-2 bg-green-500 rounded hover:bg-green-600"
-            onClick={saveJSONToLocalStorage}
-          >
-            Save JSON
-          </button>
-          <button
-            className="px-4 py-2 bg-blue-500 rounded hover:bg-blue-600"
-            onClick={copyToClipboard}
-          >
-            Copy to Clipboard
-          </button>
-        </div>
-
-        {/* Editor Area */}
-        <div className="relative flex-grow">
-          <div
-            ref={editorRef}
-            contentEditable
-            aria-label="Screenplay Editor"
-            className="absolute inset-0 p-5 overflow-y-auto font-mono text-lg outline-none"
-            onKeyDown={handleKeyDown}
-            onInput={handleInput}
-            suppressContentEditableWarning={true}
-          ></div>
-          {/* Suggestions Dropdown */}
-          {showSuggestions && suggestions.length > 0 && (
-            <ul className="absolute bg-white border border-gray-300 shadow-lg z-10">
-              {suggestions.map((suggestion, index) => (
-                <li
-                  key={index}
-                  className="p-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => {
-                    // Handle suggestion click
-                    const selection = window.getSelection();
-                    if (!selection || selection.rangeCount === 0) return;
-
-                    const range = selection.getRangeAt(0);
-                    let container = range.startContainer as HTMLElement | null;
-
-                    // If the selection is a text node, get its parent element
-                    if (
-                      container &&
-                      container.nodeType === Node.TEXT_NODE
-                    ) {
-                      container = container.parentElement;
-                    }
-
-                    // Traverse up to find a container that is a child of editorRef.current
-                    while (
-                      container?.parentElement &&
-                      container.parentElement !== editorRef.current
-                    ) {
-                      container = container.parentElement;
-                    }
-
-                    if (
-                      container &&
-                      container.parentElement === editorRef.current
-                    ) {
-                      container.textContent = suggestion;
-                      // Apply capitalization based on element type
-                      const elementType = getElementType(container);
-                      if (elementType && elementType !== 'parenthetical') {
-                        if (
-                          elementType === 'character' ||
-                          elementType === 'transition'
-                        ) {
-                          container.textContent =
-                            container.textContent.toUpperCase();
-                        } else {
-                          container.textContent = capitalizeFirstLetter(
-                            container.textContent ?? ''
-                          );
-                        }
-                      } else if (elementType === 'parenthetical') {
-                        container.textContent = '(' + (suggestion ?? '') + ')';
+                      if (container && container.nodeType === Node.TEXT_NODE) {
+                        container = container.parentElement;
                       }
 
-                      // Move cursor to the end of the text
-                      const newRange = document.createRange();
-                      newRange.selectNodeContents(container);
-                      newRange.collapse(false);
-                      selection.removeAllRanges();
-                      selection.addRange(newRange);
-                      setShowSuggestions(false);
-                      console.log(`Selected suggestion: ${suggestion}`);
-                    }
-                  }}
-                >
-                  {suggestion}
-                </li>
-              ))}
-            </ul>
-          )}
+                      while (
+                        container?.parentElement &&
+                        container.parentElement !== editorRef.current
+                      ) {
+                        container = container.parentElement;
+                      }
+
+                      if (container && container.parentElement === editorRef.current) {
+                        container.textContent = suggestion;
+                        const elementType = getElementType(container);
+                        if (elementType && elementType !== 'parenthetical') {
+                          if (elementType === 'character' || elementType === 'transition') {
+                            container.textContent = container.textContent.toUpperCase();
+                          } else {
+                            container.textContent = capitalizeFirstLetter(
+                              container.textContent ?? ''
+                            );
+                          }
+                        } else if (elementType === 'parenthetical') {
+                          container.textContent = '(' + (suggestion ?? '') + ')';
+                        }
+
+                        const newRange = document.createRange();
+                        newRange.selectNodeContents(container);
+                        newRange.collapse(false);
+                        selection.removeAllRanges();
+                        selection.addRange(newRange);
+                        setShowSuggestions(false);
+                      }
+                    }}
+                  >
+                    {suggestion}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Modals */}
+      <CharacterModal
+        isOpen={characterModalOpen}
+        onClose={() => setCharacterModalOpen(false)}
+        screenplay={screenplay}
+        onUpdateScreenplay={handleUpdateScreenplay}
+      />
+
+      <SceneModal
+        isOpen={sceneModalOpen}
+        onClose={() => setSceneModalOpen(false)}
+        screenplay={screenplay}
+        onUpdateScreenplay={handleUpdateScreenplay}
+      />
+
+      <JSONPasteModal
+        isOpen={pasteJSONModalOpen}
+        onClose={() => setPasteJSONModalOpen(false)}
+        onPaste={handleJSONPaste}
+      />
+
+      {/* Full JSON Modal */}
+      {fullJSONModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-gradient-to-br from-white to-slate-50 dark:from-slate-800 dark:to-slate-900 rounded-2xl shadow-2xl border border-slate-200/50 dark:border-slate-700/50 max-w-5xl w-full max-h-[85vh] flex flex-col overflow-hidden">
+            <div className="bg-gradient-to-r from-slate-700 via-slate-800 to-slate-900 p-6 text-white">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-lg backdrop-blur-sm">
+                    <Code className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">Complete Screenplay JSON</h3>
+                    <p className="text-slate-300 text-sm">Full structured data export of your screenplay</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setFullJSONModalOpen(false)}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors backdrop-blur-sm"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+            </div>
+            <div className="flex-1 overflow-auto p-8">
+              <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 rounded-xl border border-slate-700 shadow-inner">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <span className="ml-3 text-sm text-slate-400 font-mono">screenplay.json</span>
+                  </div>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(JSON.stringify(screenplay, null, 2))
+                        .then(() => alert('JSON copied to clipboard!'))
+                        .catch(() => alert('Failed to copy JSON'));
+                    }}
+                    className="px-3 py-1 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-md text-sm font-medium transition-colors flex items-center gap-1"
+                  >
+                    <Copy className="h-3 w-3" />
+                    Copy
+                  </button>
+                </div>
+                <pre className="text-sm overflow-auto text-green-400 font-mono leading-relaxed max-h-96">
+                  {JSON.stringify(screenplay, null, 2)}
+                </pre>
+              </div>
+              
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="p-4 bg-gradient-to-r from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-xl border border-purple-200 dark:border-purple-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Users className="h-5 w-5 text-purple-600" />
+                    <h4 className="font-semibold text-purple-900 dark:text-purple-100">Characters</h4>
+                  </div>
+                  <p className="text-2xl font-bold text-purple-600 mb-1">{screenplay.characters.length}</p>
+                  <p className="text-sm text-purple-700 dark:text-purple-300">
+                    {screenplay.characters.reduce((acc, char) => acc + char.dialogue.length, 0)} total dialogue lines
+                  </p>
+                </div>
+                
+                <div className="p-4 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl border border-green-200 dark:border-green-700">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Film className="h-5 w-5 text-green-600" />
+                    <h4 className="font-semibold text-green-900 dark:text-green-100">Scenes</h4>
+                  </div>
+                  <p className="text-2xl font-bold text-green-600 mb-1">{screenplay.scenes.length}</p>
+                  <p className="text-sm text-green-700 dark:text-green-300">
+                    {screenplay.scenes.reduce((acc, scene) => acc + scene.screen_actions.length, 0)} total actions
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

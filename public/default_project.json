@@ -1,0 +1,2292 @@
+{
+    "scenes": [
+      {
+        "heading": {
+          "line_number": 1,
+          "text": "INT. ELLIE'S APARTMENT - DAY"
+        },
+        "screen_actions": [
+          {
+            "line_number": 2,
+            "text": "ELLIE (21, dreamer, brown-haired, student) lies on the bed, fidgeting with a pen, a journal resting on her stomach. JACOB (23, pragmatic, brown-haired, entering industry) sits at the back of the bed, focused on his laptop but not intensely so."
+          },
+          {
+            "line_number": 6,
+            "text": "Jacob looks up, his attention split between Ellie and his work."
+          },
+          {
+            "line_number": 16,
+            "text": "Jacob closes his laptop, giving Ellie more attention, but not fully committing."
+          },
+          {
+            "line_number": 31,
+            "text": "Ellie sits up, frustration evident."
+          },
+          {
+            "line_number": 37,
+            "text": "Ellie sighs and gets up, heading for the door."
+          },
+          {
+            "line_number": 42,
+            "text": "A smile grows on Jacob's face."
+          },
+          {
+            "line_number": 45,
+            "text": "Ellie stands in the doorway, expectantly. She widens her eyes as an invitation."
+          }
+        ],
+        "notes": [],
+        "shots": [],
+        "transitions": [],
+        "dialogues": [
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 4,
+              "text": "Hey, babe?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 8,
+              "text": "What's up, Elz?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 10,
+              "text": "I'm feeling a bit... restless. Want to do something?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 12,
+              "text": "Define 'something.' Are we talking bungee jumping or binge-watching?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 15,
+              "text": "There's that new mural downtown. The colors are so vivid, it's like you could step right into another world."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 18,
+              "text": "You mean the graffiti? I don't know, Elz. Feels a bit like encouraging teenage rebellion, doesn't it?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 21,
+              "text": "It's art, Jake. Okay, how about the art museum then?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 23,
+              "text": "Didn't we just go last month? Don't tell me you've already forgotten all those fascinating beige walls."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 26,
+              "text": "Well, what do you suggest, Mr. Fun?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 29,
+              "text": "I should probably finish this work..."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 33,
+              "text": "Sometimes I wonder if you even hear me."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 35,
+              "text": "Hm? Did you say something?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 39,
+              "text": "Where are you going?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 41,
+              "text": "I dunno man, I guess I'm going to people-watch in the park like a pervert."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 44,
+              "text": "Jeez Elz, you always know how to keep it classy."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 47,
+              "text": "Alright, you got me. Just don't where those god awful sunglasses this time."
+            }
+          }
+        ],
+        "parentheticals": [
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 5,
+              "text": "glancing at Jacob"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 13,
+              "text": "half-smiling"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 19,
+              "text": "playfully skeptical"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 24,
+              "text": "rolling her eyes"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 27,
+              "text": "sighing"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 30,
+              "text": "glancing at his laptop"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 36,
+              "text": "jestingly"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 48,
+              "text": "his grin widening"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "line_number": 49,
+          "text": "EXT. PARK - DAY"
+        },
+        "screen_actions": [
+          {
+            "line_number": 50,
+            "text": "Jacob and Ellie sit on a park bench, a small gap between them. Ellie's eyes land on PASSERBY 1 (50's, male in hipster clothing)."
+          },
+          {
+            "line_number": 62,
+            "text": "Ellie laughs and scoots closer to Jacob, who subtly leans back."
+          },
+          {
+            "line_number": 75,
+            "text": "Ellie is visibly hurt. Deep down she knows its true - she hasn't put in the work to deserve a chance at stardom."
+          },
+          {
+            "line_number": 79,
+            "text": "Jacob puts an arm around her, pulling her close. Ellie nestles against him, her expression a mix of comfort and disappointment."
+          },
+          {
+            "line_number": 104,
+            "text": "They laugh, but there's a subtle tension underneath as they walk away. Jacob's phone VIBRATES. He's getting a call."
+          },
+          {
+            "line_number": 111,
+            "text": "Jacob steps away, answering the phone. Ellie watches him for a moment, then wanders off on her own, giving him privacy."
+          },
+          {
+            "line_number": 112,
+            "text": "She finds a nearby bench and sits down, observing the park around her. A flock of birds takes flight, catching her attention."
+          },
+          {
+            "line_number": 116,
+            "text": "Her gaze shifts to a group of children playing frisbee, their laughter carrying across the park. An elderly couple walks by, hand in hand."
+          },
+          {
+            "line_number": 119,
+            "text": "Jacob walks up behind Ellie and puts his arms over her shoulders."
+          },
+          {
+            "line_number": 125,
+            "text": "Ellie reaches up and puts her arms over Jacob's."
+          },
+          {
+            "line_number": 128,
+            "text": "Ellie's face falls slightly, but she quickly composes herself."
+          },
+          {
+            "line_number": 134,
+            "text": "Ellie turns around to face Jacob."
+          },
+          {
+            "line_number": 137,
+            "text": "Jacob studies her face, appreciative of her grace."
+          },
+          {
+            "line_number": 143,
+            "text": "Jacob nods, then pulls her into a hug. Ellie stiffens for a moment before relaxing into the embrace."
+          },
+          {
+            "line_number": 147,
+            "text": "Ellie nods against his chest. As they pull apart, Jacob cups her face gently."
+          },
+          {
+            "line_number": 158,
+            "text": "Jacob gives her a quick kiss on the forehead, then starts to walk away. He turns back once, giving her a small wave. Ellie returns it halfheartedly."
+          },
+          {
+            "line_number": 159,
+            "text": "Once Jacob is out of sight, Ellie's smile fades. She sits back down on the bench, her posture deflating slightly. She looks around the park, her eyes landing on a couple walking hand in hand. Ellie looks jealous and quickly aims to distract herself."
+          },
+          {
+            "line_number": 162,
+            "text": "Ellie starts walking out of the park."
+          }
+        ],
+        "notes": [],
+        "shots": [],
+        "transitions": [],
+        "dialogues": [
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 52,
+              "text": "Okay, I'll start. Former tech CEO, now teaches interpretive dance to rescue dogs."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 54,
+              "text": "Not even close. Clearly a retired meteorologist who joined an indie band to cope with his midlife crisis."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 57,
+              "text": "Ah yes, the classic weather-forecaster-to-rockstar pipeline."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 60,
+              "text": "Hey, he might have his head in the clouds, but there's a chance of a hit when he brings the thunder."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 64,
+              "text": "So... have you given any more thought to L.A.?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 67,
+              "text": "Yeah... I just don't think it makes sense. It's a lot more competitive out there and we have no connections."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 70,
+              "text": "I know it's risky, but isn't that what being young is all about? Taking chances?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 73,
+              "text": "Look, I get it. But if acting was really your passion, wouldn't you have been working towards it non-stop for years? It's not something you just stumble into."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 77,
+              "text": "I guess you're right."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 81,
+              "text": "Hey, it's not all bad. You've got that design internship coming up, right?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 84,
+              "text": "Yeah..."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 86,
+              "text": "Who knows? Maybe in a year or two, it leads to something in L.A. These things take time."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 89,
+              "text": "I know. It just feels so far away."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 92,
+              "text": "I know, baby. But there are no shortcuts. You've got to put in the work."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 94,
+              "text": "Okay. Want to grab some lunch?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 97,
+              "text": "Sure, Elz."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 99,
+              "text": "How about a mano?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 101,
+              "text": "I could go for some burrata."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 103,
+              "text": "Ugh, you always get the weirdest stuff."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 106,
+              "text": "Sorry, do you mind?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 109,
+              "text": "Go ahead."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 114,
+              "text": "Strange... they seem so urgent today."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 118,
+              "text": "Everything feels... different somehow."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 121,
+              "text": "Hey, sorry about that."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 124,
+              "text": "Oh, no worries. Everything okay?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 127,
+              "text": "Actually... I hate to do this, but there's a problem at the office. The large format printer is down, and we have a big deadline tomorrow."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 131,
+              "text": "Oh. I see."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 133,
+              "text": "I'm really sorry, Elz. I know I haven't been super present lately."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 136,
+              "text": "No, it's... it's fine. You should go. We can get a mano tonight."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 139,
+              "text": "Are you sure? I could try to—"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 141,
+              "text": "It's okay. Really. I'll see you tonight."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 146,
+              "text": "I'll make it up to you, I promise."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 149,
+              "text": "Go and have some fun Elz, don't let me get you down."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 152,
+              "text": "Yeah, don't worry about me."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 154,
+              "text": "I'll call you later, okay?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 157,
+              "text": "Sure."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 161,
+              "text": "Fun, right..."
+            }
+          }
+        ],
+        "parentheticals": [
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 55,
+              "text": "deadpan"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 58,
+              "text": "giggling"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 61,
+              "text": "with a hint of a smile"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 65,
+              "text": "trying to sound casual"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 68,
+              "text": "tensing slightly"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 71,
+              "text": "persistent"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 74,
+              "text": "gently patronizing"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 78,
+              "text": "quietly"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 82,
+              "text": "nodding"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 87,
+              "text": "sighing"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 90,
+              "text": "kissing her forehead"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 95,
+              "text": "smiling back"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 107,
+              "text": "awkward teasing"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 110,
+              "text": "dismissive, upbeat"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 115,
+              "text": "muttering to herself"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 122,
+              "text": "snapping out of her reverie"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 129,
+              "text": "forcing a small smile"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 142,
+              "text": "interrupting, her tone a bit firmer"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 144,
+              "text": "softly"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 150,
+              "text": "with a weak smile"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 155,
+              "text": "Sure"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "line_number": 163,
+          "text": "EXT. 5TH STREET NW BRIDGE - DAY"
+        },
+        "screen_actions": [
+          {
+            "line_number": 164,
+            "text": "Ellie walks onto the bridge, a Nine Patch patch from the High Museum on her backpack. She leans against the railing, sketching the Georgia Tech campus visible just across the way."
+          },
+          {
+            "line_number": 168,
+            "text": "Ellie turns to see CHLOE (20, quirky, awkward student at Georgia Tech) holding up her phone, a photo of the Nine Patch quilt on the screen."
+          },
+          {
+            "line_number": 175,
+            "text": "Chloe gestures to the campus across the bridge."
+          },
+          {
+            "line_number": 191,
+            "text": "They both lean on the railing, watching the cars pass beneath them."
+          },
+          {
+            "line_number": 198,
+            "text": "Ellie and Chloe stare at each other, clearly a lot of chemistry between them. Ellie starts to say something but gets cut off when a voice calls out from across the bridge, breaking the moment."
+          },
+          {
+            "line_number": 202,
+            "text": "Ellie turns to see ALEX (22, energetic, blonde) waving at her from the opposite side of the bridge."
+          },
+          {
+            "line_number": 212,
+            "text": "Ellie turns back to introduce Chloe, but she's vanished. Ellie is left motioning at empty air."
+          },
+          {
+            "line_number": 219,
+            "text": "Ellie walks up to Alex."
+          },
+          {
+            "line_number": 225,
+            "text": "As they walk, Ellie looks back at the bridge and ponders what happened to Chloe."
+          }
+        ],
+        "notes": [],
+        "shots": [],
+        "transitions": [],
+        "dialogues": [
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 166,
+              "text": "No way, you have the Nine Patch patch too?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 170,
+              "text": "Yeah! Marquetta Johnson's piece, right? It blew my mind."
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 173,
+              "text": "The way she transformed her grief into something so beautiful..."
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 177,
+              "text": "Sometimes I wonder if I'll ever create something that meaningful. Especially when I'm stuck in the grind of classes and projects."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 180,
+              "text": "I know what you mean. It's like we're all just part of this endless flow. Trying to find our way, our purpose."
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 183,
+              "text": "And here we are, two art students, trying to make sense of it all from a bridge."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 186,
+              "text": "A bridge between worlds. The academic bubble and the real world."
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 189,
+              "text": "Or between chaos and meaning. The traffic and the quilt."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 193,
+              "text": "Do you ever feel like you're just... drifting? Like one of these cars, just going through the motions?"
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 196,
+              "text": "All the time. But then I look at the campus, at all the possibilities ahead of us, and I think... we have a chance to stitch our own stories. To find our own patches of meaning."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 200,
+              "text": "Ellie! Hey, Ellie!"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 204,
+              "text": "Alex! What are you doing here?"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 207,
+              "text": "Book club! What are you doing here?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 210,
+              "text": "Just wandering - Hey, you'd love Chloe!"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 215,
+              "text": "Who?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 217,
+              "text": "Uhh.. nobody. Hey - do you want to go get a bite to eat?"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 221,
+              "text": "Sure... but I'm on a bit of a health kick. Why don't we just go back to your apartment? I'd love to see what your working on."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 224,
+              "text": "Oh, yeah - you haven't seen my new painting yet. Ok, let's go."
+            }
+          }
+        ],
+        "parentheticals": [
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 167,
+              "text": "excitedly"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 171,
+              "text": "grinning"
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 174,
+              "text": "nodding vigorously"
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 178,
+              "text": "continuing"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 181,
+              "text": "nodding, pointing to the traffic below"
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 184,
+              "text": "musing"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 187,
+              "text": "chuckling"
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 190,
+              "text": "smiling"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 194,
+              "text": "pensively"
+            }
+          },
+          {
+            "character": "CHLOE",
+            "line": {
+              "line_number": 197,
+              "text": "meeting her gaze"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 201,
+              "text": "yelling"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 205,
+              "text": "laughing, yelling back"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 208,
+              "text": "still yelling"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 211,
+              "text": "still yelling"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 213,
+              "text": "still yelling"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 218,
+              "text": "walking across the bridge"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 222,
+              "text": "eager to share her work"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "line_number": 226,
+          "text": "INT. ELLIE'S APARTMENT - EVENING"
+        },
+        "screen_actions": [
+          {
+            "line_number": 227,
+            "text": "Ellie and Alex enter the apartment. Ellie's mind seems elsewhere as she sets down her backpack, the Nine Patch patch prominently visible."
+          },
+          {
+            "line_number": 233,
+            "text": "They walk into Ellie's bedroom. An easel stands in the corner with a half-finished painting on it - abstract swirls of color that hint at a cityscape."
+          },
+          {
+            "line_number": 240,
+            "text": "Alex notices Ellie's distant demeanor."
+          },
+          {
+            "line_number": 251,
+            "text": "Ellie sits on her bed, looking confused. Alex joins her."
+          },
+          {
+            "line_number": 260,
+            "text": "As Ellie talks, she absentmindedly reaches for her sketchbook and starts drawing."
+          },
+          {
+            "line_number": 264,
+            "text": "Ellie's hand pauses mid-sketch. She looks saddened."
+          },
+          {
+            "line_number": 281,
+            "text": "Alex picks up Ellie's phone from the nightstand."
+          },
+          {
+            "line_number": 284,
+            "text": "Ellie takes the phone but doesn't dial."
+          },
+          {
+            "line_number": 290,
+            "text": "Ellie nods, but still hesitates. She looks down at her sketchbook."
+          },
+          {
+            "line_number": 291,
+            "text": "We see she's unconsciously sketched Chloe's face, capturing the intensity of their earlier conversation."
+          },
+          {
+            "line_number": 296,
+            "text": "Alex leaves the room. Ellie stares at her phone, then at the sketch of Chloe. Finally, she dials Jacob's number. It goes to voicemail."
+          },
+          {
+            "line_number": 300,
+            "text": "She hangs up and falls back on her bed, staring at the ceiling, lost in thought. Ellie drifts off to sleep..."
+          }
+        ],
+        "notes": [],
+        "shots": [
+          {
+            "line_number": 292,
+            "text": "CLOSE UP: ELLIE'S SKETCHBOOK"
+          }
+        ],
+        "transitions": [],
+        "dialogues": [
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 229,
+              "text": "So, where's this new painting you were talking about?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 232,
+              "text": "Oh, right. It's in my room. Come on."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 236,
+              "text": "Wow, this is really something, Ellie. It's so... vibrant."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 239,
+              "text": "Thanks. I've been experimenting with new techniques."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 242,
+              "text": "Hey, you okay? You seem a million miles away."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 245,
+              "text": "Yeah, I'm fine. It's just... something weird happened on the bridge."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 247,
+              "text": "Weird how?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 249,
+              "text": "I met this girl, Chloe. We were talking about art and life, and it was... intense. But then she just vanished when you showed up."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 253,
+              "text": "Vanished? Are you sure she didn't just walk away?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 256,
+              "text": "I... I don't know. It all happened so fast."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 258,
+              "text": "So, tell me about this Chloe. What was so intense about your conversation?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 262,
+              "text": "She understood my art in a way no one else has. We connected over the Nine Patch quilt at the museum, and then we started talking about finding meaning in life, in art..."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 266,
+              "text": "And Jacob? Have you talked to him today?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 269,
+              "text": "Yeah, he had to go into work though - some kind of emergency."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 272,
+              "text": "Ellie, what's going on with you two?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 274,
+              "text": "I don't know. Lately, it feels like we're on different wavelengths. He's so focused on his career, and I'm..."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 277,
+              "text": "You're what?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 280,
+              "text": "I'm stuck. I feel like I'm just going through the motions, you know? But today, talking to Chloe, I felt... alive."
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 283,
+              "text": "Maybe you should call Jacob. Talk to him about how you're feeling."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 286,
+              "text": "What would I even say? \"Hey, I met a girl on a bridge and now I'm questioning everything?\""
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 289,
+              "text": "Maybe start with \"I miss you.\""
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 294,
+              "text": "Look, I'm gonna give you some space. But Ellie? Don't shut Jacob out. Whatever you're feeling, he can't help unless you tell him."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 298,
+              "text": "Hey, it's me. I... I miss you. Can we talk soon? There's a lot going on and I... I need you."
+            }
+          }
+        ],
+        "parentheticals": [
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 230,
+              "text": "snapping back to reality"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 234,
+              "text": "examining the painting"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 237,
+              "text": "distracted"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 243,
+              "text": "hesitating"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 250,
+              "text": "puzzled"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 254,
+              "text": "uncertain"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 259,
+              "text": "animated"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 263,
+              "text": "gently"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 267,
+              "text": "concerned"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 270,
+              "text": "sighing"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 275,
+              "text": "frustrated"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 278,
+              "text": "frustrated"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 287,
+              "text": "softly"
+            }
+          },
+          {
+            "character": "ALEX",
+            "line": {
+              "line_number": 295,
+              "text": "standing up"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 299,
+              "text": "into phone"
+            }
+          }
+        ]
+      },
+      {
+        "heading": {
+          "line_number": 301,
+          "text": "INT. ELLIE'S APARTMENT - EVENING (AROUND 7 PM)"
+        },
+        "screen_actions": [
+          {
+            "line_number": 302,
+            "text": "Soft, golden light filters through the curtains as the sun begins to set. ELLIE is asleep on the couch, her phone on the coffee table next to her, its screen dark. The room is quiet except for the faint sound of traffic outside."
+          },
+          {
+            "line_number": 303,
+            "text": "The sound of a key turning in the lock slowly pulls Ellie from her sleep. Her eyes flutter open as the door creaks open."
+          },
+          {
+            "line_number": 306,
+            "text": "Ellie sits up groggily, her hair slightly messy from sleep. She blinks, trying to orient herself as Jacob enters, carrying a bag of takeout."
+          },
+          {
+            "line_number": 313,
+            "text": "Ellie reaches for her phone, seeing the missed texts. She runs a hand through her hair."
+          },
+          {
+            "line_number": 319,
+            "text": "Ellie stands, stretching. Jacob is visibly tense, unsure how Ellie is feeling."
+          },
+          {
+            "line_number": 329,
+            "text": "They move to the small kitchen table, sitting down with their food."
+          },
+          {
+            "line_number": 336,
+            "text": "Jacob manages a small chuckle, visibly relaxing a bit."
+          },
+          {
+            "line_number": 348,
+            "text": "Jacob's tension eases a bit more, encouraged by Ellie's enthusiasm."
+          },
+          {
+            "line_number": 361,
+            "text": "Jacob nods, his earlier tension returning. He watches Ellie for a moment as she eats, seemingly carefree."
+          },
+          {
+            "line_number": 373,
+            "text": "Jacob blinks, caught off guard by the non-sequitur. He stares at Ellie, trying to process her words."
+          },
+          {
+            "line_number": 384,
+            "text": "Jacob is at a loss for words, looking down at his food - spaghetti and meatballs."
+          },
+          {
+            "line_number": 386,
+            "text": "Ellie stands up from her chair and goes to get water for her and Jacob."
+          },
+          {
+            "line_number": 389,
+            "text": "The camera stays on Jacob as Ellie moves out of frame. We hear the sound of running water. Jacob looks down at his food, then back up at where Ellie was sitting."
+          },
+          {
+            "line_number": 396,
+            "text": "Slowly, hesitantly, he picks up his fork and takes a bite."
+          }
+        ],
+        "notes": [],
+        "shots": [],
+        "transitions": [
+          {
+            "line_number": 397,
+            "text": "CUT TO CREDITS"
+          }
+        ],
+        "dialogues": [
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 305,
+              "text": "Ellie?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 308,
+              "text": "Jake? Oh man, how long was I out?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 311,
+              "text": "Hey, sleepyhead. It's just after seven. I brought a mano's."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 315,
+              "text": "Oh, I didn't hear my phone - sorry. Thanks for grabbing dinner."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 317,
+              "text": "No problem."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 321,
+              "text": "How was work?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 324,
+              "text": "Uhh.. We got the printer fixed."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 327,
+              "text": "That's good."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 331,
+              "text": "So, tell me more about this printer saga. Was it a paper jam? Toner explosion?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 334,
+              "text": "Uh, no... just a software glitch. We had to call IT."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 338,
+              "text": "Ah, the unsung heroes of the corporate world. Did they try turning it off and on again?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 341,
+              "text": "Something like that."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 344,
+              "text": "Mm, this is good. We should get mano's more often."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 347,
+              "text": "Yeah, maybe we could make it a regular thing?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 351,
+              "text": "Ooh, like a weekly date night? That could be fun."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 354,
+              "text": "Speaking of fun, how was your day? Do anything interesting?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 356,
+              "text": "Oh, you know, the usual. Sketched a bit, people-watched. Oh! I met this really cool art student on the 5th street northwest bridge."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 358,
+              "text": "Yeah? What were they like?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 360,
+              "text": "Her name was Chloe. We had this great conversation about art and finding meaning in our work. It was... refreshing."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 364,
+              "text": "That's... that's great, Elz."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 366,
+              "text": "Yeah, it really got me thinking about my own art. Maybe I should try some new techniques, shake things up a bit."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 369,
+              "text": "I thought you were happy with your current style."
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 372,
+              "text": "I am, but you know me. Always looking to evolve, try new things."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 376,
+              "text": "Ellie, can I ask you something?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 380,
+              "text": "Mmhmm?"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 382,
+              "text": "Are you... are you happy? With us, I mean. With how things are going?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 388,
+              "text": "You know, I really appreciate that you didn't get the burrata this time."
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 392,
+              "text": "I... what?"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 394,
+              "text": "The burrata. You always get it, even though I think it's disgusting."
+            }
+          }
+        ],
+        "parentheticals": [
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 309,
+              "text": "disoriented"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 312,
+              "text": "smiling softly"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 318,
+              "text": "setting the food down in the kitchen"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 322,
+              "text": "casually"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 325,
+              "text": "awkwardly"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 328,
+              "text": "nodding"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 332,
+              "text": "cheerfully"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 335,
+              "text": "caught off guard by her lightness"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 339,
+              "text": "dramatically"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 342,
+              "text": "with a hint of a smile"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 345,
+              "text": "taking a bite of her food"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 349,
+              "text": "hesitantly"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 352,
+              "text": "warming up"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 362,
+              "text": "animated"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 367,
+              "text": "smile fading slightly"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 370,
+              "text": "not noticing his change in mood"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 374,
+              "text": "carefully"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 377,
+              "text": "shrugging lightly"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 378,
+              "text": "hesitantly"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 383,
+              "text": "mouth full"
+            }
+          },
+          {
+            "character": "JACOB",
+            "line": {
+              "line_number": 385,
+              "text": "taking a deep breath"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 390,
+              "text": "after a long moment, quietly"
+            }
+          },
+          {
+            "character": "ELLIE",
+            "line": {
+              "line_number": 395,
+              "text": "with a gentle smile"
+            }
+          }
+        ]
+      }
+    ],
+    "characters": [
+      {
+        "name": "ELLIE",
+        "dialogue": [
+          {
+            "line_number": 4,
+            "text": "Hey, babe?"
+          },
+          {
+            "line_number": 10,
+            "text": "I'm feeling a bit... restless. Want to do something?"
+          },
+          {
+            "line_number": 15,
+            "text": "There's that new mural downtown. The colors are so vivid, it's like you could step right into another world."
+          },
+          {
+            "line_number": 21,
+            "text": "It's art, Jake. Okay, how about the art museum then?"
+          },
+          {
+            "line_number": 26,
+            "text": "Well, what do you suggest, Mr. Fun?"
+          },
+          {
+            "line_number": 33,
+            "text": "Sometimes I wonder if you even hear me."
+          },
+          {
+            "line_number": 41,
+            "text": "I dunno man, I guess I'm going to people-watch in the park like a pervert."
+          },
+          {
+            "line_number": 52,
+            "text": "Okay, I'll start. Former tech CEO, now teaches interpretive dance to rescue dogs."
+          },
+          {
+            "line_number": 57,
+            "text": "Ah yes, the classic weather-forecaster-to-rockstar pipeline."
+          },
+          {
+            "line_number": 64,
+            "text": "So... have you given any more thought to L.A.?"
+          },
+          {
+            "line_number": 70,
+            "text": "I know it's risky, but isn't that what being young is all about? Taking chances?"
+          },
+          {
+            "line_number": 77,
+            "text": "I guess you're right."
+          },
+          {
+            "line_number": 84,
+            "text": "Yeah..."
+          },
+          {
+            "line_number": 89,
+            "text": "I know. It just feels so far away."
+          },
+          {
+            "line_number": 94,
+            "text": "Okay. Want to grab some lunch?"
+          },
+          {
+            "line_number": 99,
+            "text": "How about a mano?"
+          },
+          {
+            "line_number": 103,
+            "text": "Ugh, you always get the weirdest stuff."
+          },
+          {
+            "line_number": 109,
+            "text": "Go ahead."
+          },
+          {
+            "line_number": 114,
+            "text": "Strange... they seem so urgent today."
+          },
+          {
+            "line_number": 118,
+            "text": "Everything feels... different somehow."
+          },
+          {
+            "line_number": 124,
+            "text": "Oh, no worries. Everything okay?"
+          },
+          {
+            "line_number": 131,
+            "text": "Oh. I see."
+          },
+          {
+            "line_number": 136,
+            "text": "No, it's... it's fine. You should go. We can get a mano tonight."
+          },
+          {
+            "line_number": 141,
+            "text": "It's okay. Really. I'll see you tonight."
+          },
+          {
+            "line_number": 152,
+            "text": "Yeah, don't worry about me."
+          },
+          {
+            "line_number": 157,
+            "text": "Sure."
+          },
+          {
+            "line_number": 161,
+            "text": "Fun, right..."
+          },
+          {
+            "line_number": 170,
+            "text": "Yeah! Marquetta Johnson's piece, right? It blew my mind."
+          },
+          {
+            "line_number": 180,
+            "text": "I know what you mean. It's like we're all just part of this endless flow. Trying to find our way, our purpose."
+          },
+          {
+            "line_number": 186,
+            "text": "A bridge between worlds. The academic bubble and the real world."
+          },
+          {
+            "line_number": 193,
+            "text": "Do you ever feel like you're just... drifting? Like one of these cars, just going through the motions?"
+          },
+          {
+            "line_number": 204,
+            "text": "Alex! What are you doing here?"
+          },
+          {
+            "line_number": 210,
+            "text": "Just wandering - Hey, you'd love Chloe!"
+          },
+          {
+            "line_number": 217,
+            "text": "Uhh.. nobody. Hey - do you want to go get a bite to eat?"
+          },
+          {
+            "line_number": 224,
+            "text": "Oh, yeah - you haven't seen my new painting yet. Ok, let's go."
+          },
+          {
+            "line_number": 232,
+            "text": "Oh, right. It's in my room. Come on."
+          },
+          {
+            "line_number": 239,
+            "text": "Thanks. I've been experimenting with new techniques."
+          },
+          {
+            "line_number": 245,
+            "text": "Yeah, I'm fine. It's just... something weird happened on the bridge."
+          },
+          {
+            "line_number": 249,
+            "text": "I met this girl, Chloe. We were talking about art and life, and it was... intense. But then she just vanished when you showed up."
+          },
+          {
+            "line_number": 256,
+            "text": "I... I don't know. It all happened so fast."
+          },
+          {
+            "line_number": 262,
+            "text": "She understood my art in a way no one else has. We connected over the Nine Patch quilt at the museum, and then we started talking about finding meaning in life, in art..."
+          },
+          {
+            "line_number": 269,
+            "text": "Yeah, he had to go into work though - some kind of emergency."
+          },
+          {
+            "line_number": 274,
+            "text": "I don't know. Lately, it feels like we're on different wavelengths. He's so focused on his career, and I'm..."
+          },
+          {
+            "line_number": 280,
+            "text": "I'm stuck. I feel like I'm just going through the motions, you know? But today, talking to Chloe, I felt... alive."
+          },
+          {
+            "line_number": 286,
+            "text": "What would I even say? \"Hey, I met a girl on a bridge and now I'm questioning everything?\""
+          },
+          {
+            "line_number": 298,
+            "text": "Hey, it's me. I... I miss you. Can we talk soon? There's a lot going on and I... I need you."
+          },
+          {
+            "line_number": 308,
+            "text": "Jake? Oh man, how long was I out?"
+          },
+          {
+            "line_number": 315,
+            "text": "Oh, I didn't hear my phone - sorry. Thanks for grabbing dinner."
+          },
+          {
+            "line_number": 321,
+            "text": "How was work?"
+          },
+          {
+            "line_number": 327,
+            "text": "That's good."
+          },
+          {
+            "line_number": 331,
+            "text": "So, tell me more about this printer saga. Was it a paper jam? Toner explosion?"
+          },
+          {
+            "line_number": 338,
+            "text": "Ah, the unsung heroes of the corporate world. Did they try turning it off and on again?"
+          },
+          {
+            "line_number": 344,
+            "text": "Mm, this is good. We should get mano's more often."
+          },
+          {
+            "line_number": 351,
+            "text": "Ooh, like a weekly date night? That could be fun."
+          },
+          {
+            "line_number": 356,
+            "text": "Oh, you know, the usual. Sketched a bit, people-watched. Oh! I met this really cool art student on the 5th street northwest bridge."
+          },
+          {
+            "line_number": 360,
+            "text": "Her name was Chloe. We had this great conversation about art and finding meaning in our work. It was... refreshing."
+          },
+          {
+            "line_number": 366,
+            "text": "Yeah, it really got me thinking about my own art. Maybe I should try some new techniques, shake things up a bit."
+          },
+          {
+            "line_number": 372,
+            "text": "I am, but you know me. Always looking to evolve, try new things."
+          },
+          {
+            "line_number": 380,
+            "text": "Mmhmm?"
+          },
+          {
+            "line_number": 388,
+            "text": "You know, I really appreciate that you didn't get the burrata this time."
+          },
+          {
+            "line_number": 394,
+            "text": "The burrata. You always get it, even though I think it's disgusting."
+          }
+        ]
+      },
+      {
+        "name": "JACOB",
+        "dialogue": [
+          {
+            "line_number": 8,
+            "text": "What's up, Elz?"
+          },
+          {
+            "line_number": 12,
+            "text": "Define 'something.' Are we talking bungee jumping or binge-watching?"
+          },
+          {
+            "line_number": 18,
+            "text": "You mean the graffiti? I don't know, Elz. Feels a bit like encouraging teenage rebellion, doesn't it?"
+          },
+          {
+            "line_number": 23,
+            "text": "Didn't we just go last month? Don't tell me you've already forgotten all those fascinating beige walls."
+          },
+          {
+            "line_number": 29,
+            "text": "I should probably finish this work..."
+          },
+          {
+            "line_number": 35,
+            "text": "Hm? Did you say something?"
+          },
+          {
+            "line_number": 39,
+            "text": "Where are you going?"
+          },
+          {
+            "line_number": 44,
+            "text": "Jeez Elz, you always know how to keep it classy."
+          },
+          {
+            "line_number": 47,
+            "text": "Alright, you got me. Just don't where those god awful sunglasses this time."
+          },
+          {
+            "line_number": 54,
+            "text": "Not even close. Clearly a retired meteorologist who joined an indie band to cope with his midlife crisis."
+          },
+          {
+            "line_number": 60,
+            "text": "Hey, he might have his head in the clouds, but there's a chance of a hit when he brings the thunder."
+          },
+          {
+            "line_number": 67,
+            "text": "Yeah... I just don't think it makes sense. It's a lot more competitive out there and we have no connections."
+          },
+          {
+            "line_number": 73,
+            "text": "Look, I get it. But if acting was really your passion, wouldn't you have been working towards it non-stop for years? It's not something you just stumble into."
+          },
+          {
+            "line_number": 81,
+            "text": "Hey, it's not all bad. You've got that design internship coming up, right?"
+          },
+          {
+            "line_number": 86,
+            "text": "Who knows? Maybe in a year or two, it leads to something in L.A. These things take time."
+          },
+          {
+            "line_number": 92,
+            "text": "I know, baby. But there are no shortcuts. You've got to put in the work."
+          },
+          {
+            "line_number": 97,
+            "text": "Sure, Elz."
+          },
+          {
+            "line_number": 101,
+            "text": "I could go for some burrata."
+          },
+          {
+            "line_number": 106,
+            "text": "Sorry, do you mind?"
+          },
+          {
+            "line_number": 121,
+            "text": "Hey, sorry about that."
+          },
+          {
+            "line_number": 127,
+            "text": "Actually... I hate to do this, but there's a problem at the office. The large format printer is down, and we have a big deadline tomorrow."
+          },
+          {
+            "line_number": 133,
+            "text": "I'm really sorry, Elz. I know I haven't been super present lately."
+          },
+          {
+            "line_number": 139,
+            "text": "Are you sure? I could try to—"
+          },
+          {
+            "line_number": 146,
+            "text": "I'll make it up to you, I promise."
+          },
+          {
+            "line_number": 149,
+            "text": "Go and have some fun Elz, don't let me get you down."
+          },
+          {
+            "line_number": 154,
+            "text": "I'll call you later, okay?"
+          },
+          {
+            "line_number": 305,
+            "text": "Ellie?"
+          },
+          {
+            "line_number": 311,
+            "text": "Hey, sleepyhead. It's just after seven. I brought a mano's."
+          },
+          {
+            "line_number": 317,
+            "text": "No problem."
+          },
+          {
+            "line_number": 324,
+            "text": "Uhh.. We got the printer fixed."
+          },
+          {
+            "line_number": 334,
+            "text": "Uh, no... just a software glitch. We had to call IT."
+          },
+          {
+            "line_number": 341,
+            "text": "Something like that."
+          },
+          {
+            "line_number": 347,
+            "text": "Yeah, maybe we could make it a regular thing?"
+          },
+          {
+            "line_number": 354,
+            "text": "Speaking of fun, how was your day? Do anything interesting?"
+          },
+          {
+            "line_number": 358,
+            "text": "Yeah? What were they like?"
+          },
+          {
+            "line_number": 364,
+            "text": "That's... that's great, Elz."
+          },
+          {
+            "line_number": 369,
+            "text": "I thought you were happy with your current style."
+          },
+          {
+            "line_number": 376,
+            "text": "Ellie, can I ask you something?"
+          },
+          {
+            "line_number": 382,
+            "text": "Are you... are you happy? With us, I mean. With how things are going?"
+          },
+          {
+            "line_number": 392,
+            "text": "I... what?"
+          }
+        ]
+      },
+      {
+        "name": "CHLOE",
+        "dialogue": [
+          {
+            "line_number": 166,
+            "text": "No way, you have the Nine Patch patch too?"
+          },
+          {
+            "line_number": 173,
+            "text": "The way she transformed her grief into something so beautiful..."
+          },
+          {
+            "line_number": 177,
+            "text": "Sometimes I wonder if I'll ever create something that meaningful. Especially when I'm stuck in the grind of classes and projects."
+          },
+          {
+            "line_number": 183,
+            "text": "And here we are, two art students, trying to make sense of it all from a bridge."
+          },
+          {
+            "line_number": 189,
+            "text": "Or between chaos and meaning. The traffic and the quilt."
+          },
+          {
+            "line_number": 196,
+            "text": "All the time. But then I look at the campus, at all the possibilities ahead of us, and I think... we have a chance to stitch our own stories. To find our own patches of meaning."
+          }
+        ]
+      },
+      {
+        "name": "ALEX",
+        "dialogue": [
+          {
+            "line_number": 200,
+            "text": "Ellie! Hey, Ellie!"
+          },
+          {
+            "line_number": 207,
+            "text": "Book club! What are you doing here?"
+          },
+          {
+            "line_number": 215,
+            "text": "Who?"
+          },
+          {
+            "line_number": 221,
+            "text": "Sure... but I'm on a bit of a health kick. Why don't we just go back to your apartment? I'd love to see what your working on."
+          },
+          {
+            "line_number": 229,
+            "text": "So, where's this new painting you were talking about?"
+          },
+          {
+            "line_number": 236,
+            "text": "Wow, this is really something, Ellie. It's so... vibrant."
+          },
+          {
+            "line_number": 242,
+            "text": "Hey, you okay? You seem a million miles away."
+          },
+          {
+            "line_number": 247,
+            "text": "Weird how?"
+          },
+          {
+            "line_number": 253,
+            "text": "Vanished? Are you sure she didn't just walk away?"
+          },
+          {
+            "line_number": 258,
+            "text": "So, tell me about this Chloe. What was so intense about your conversation?"
+          },
+          {
+            "line_number": 266,
+            "text": "And Jacob? Have you talked to him today?"
+          },
+          {
+            "line_number": 272,
+            "text": "Ellie, what's going on with you two?"
+          },
+          {
+            "line_number": 277,
+            "text": "You're what?"
+          },
+          {
+            "line_number": 283,
+            "text": "Maybe you should call Jacob. Talk to him about how you're feeling."
+          },
+          {
+            "line_number": 289,
+            "text": "Maybe start with \"I miss you.\""
+          },
+          {
+            "line_number": 294,
+            "text": "Look, I'm gonna give you some space. But Ellie? Don't shut Jacob out. Whatever you're feeling, he can't help unless you tell him."
+          }
+        ]
+      }
+    ]
+  }
